@@ -69,8 +69,8 @@
 
   <mat-drawer-container class="example-container">
     <mat-drawer mode="side" opened style="width: 16em;">
-      <mat-selection-list #shoes [multiple]="false">
-        <mat-list-option *ngFor="let dashboard_element of dashboardPopulator">
+      <mat-selection-list #portal [multiple]="false" (selectionChange)="onPortalChange(portal.selectedOptions.selected[0]);">
+        <mat-list-option *ngFor="let dashboard_element of dashboardPopulator" [value]="dashboard_element">
           <div style="display: flex; flex-direction: row;">
 
             <img src={{dashboard_element.image_src}} height="20em">
@@ -81,6 +81,10 @@
         </mat-list-option>
       </mat-selection-list>
     </mat-drawer>
-    <mat-drawer-content>Main content</mat-drawer-content>
+    <mat-drawer-content>
+      <router-outlet>
+
+      </router-outlet>
+    </mat-drawer-content>
   </mat-drawer-container>
 </div>
