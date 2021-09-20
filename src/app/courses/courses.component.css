@@ -25,6 +25,14 @@ table {
     background: rgba(224, 224, 224, 1);
 }
 
+tr.example-element-row:not(.example-expanded-row):hover {
+    background: rgba(225, 227, 228, 0.5);
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+    background: rgba(225, 227, 228, 0.5);
+}
+
 td,
 th {
     width: 25%;

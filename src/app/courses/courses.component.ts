@@ -26,7 +26,7 @@ const NAMES: string[] = [
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
+  displayedColumns: string[] = ['id', 'name', 'category', 'enrollment'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator)
