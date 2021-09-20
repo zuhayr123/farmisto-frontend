@@ -10,3 +10,22 @@
     padding-left: 1.7em;
     color: dimgray;
 }
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 96%;
+}
+
+.mat-header-cell {
+    height: 6em !important;
+    background: rgba(224, 224, 224, 1);
+}
+
+td,
+th {
+    width: 25%;
+}
