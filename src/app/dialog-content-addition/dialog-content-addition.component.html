@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Start a new course!</h1>
+<div mat-dialog-content style="color: dimgray; width: 25vw;">Enter the name of your new course, don't worry you will be able to edit it later.</div>
+
+<mat-form-field appearance="outline">
+    <mat-label>Course</mat-label>
+    <input matInput placeholder="Crop" #input>
+    <mat-icon matSuffix>edit</mat-icon>
+</mat-form-field>
+
+
+<mat-dialog-actions color="primary" style="justify-content: right;">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Start</button>
+</mat-dialog-actions>

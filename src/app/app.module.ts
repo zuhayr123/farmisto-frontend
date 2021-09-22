@@ -19,7 +19,9 @@ import {MatPaginatorModule} from '@angular/material/paginator'
 import { MatInputModule } from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { MatSortModule } from '@angular/material/sort';
-import {MatButtonModule} from '@angular/material/button'
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogContentAdditionComponent } from './dialog-content-addition/dialog-content-addition.component'
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import {MatButtonModule} from '@angular/material/button'
     HomeComponent,
     CoursesComponent,
     AnalyticsComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    DialogContentAdditionComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import {MatButtonModule} from '@angular/material/button'
     MatPaginatorModule,
     MatIconModule,
     MatSortModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

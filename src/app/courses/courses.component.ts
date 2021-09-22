@@ -2,6 +2,8 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogContentAdditionComponent } from '../dialog-content-addition/dialog-content-addition.component';
 
 export interface UserData {
   id: string;
@@ -34,7 +36,7 @@ export class CoursesComponent implements AfterViewInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
@@ -54,6 +56,17 @@ export class CoursesComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogContentAdditionComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      if (result == true) {
+        // this.deleteJobs(id);
+      }
+    });
   }
 }
 
