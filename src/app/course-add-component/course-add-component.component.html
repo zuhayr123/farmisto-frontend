@@ -1,0 +1,75 @@
+<div style="width: 98%; height: 98%; background-color: white; margin: 1%; border-radius: 20px;">
+
+    <div style="display: flex; flex-direction: row;" class="align_div">
+        <button mat-icon-button aria-label="Example icon button with a home icon">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <div class="title">
+            Add New Course
+        </div>
+    </div>
+
+    <div class="description">
+        Each course has chapters, subchapters and then videos and text files. You can upload all of this one by one here.
+    </div>
+
+    <div class="align_content">
+        <div style="display: inline-flex; flex-direction: row; align-items: center; border-radius: 12px; background: #eee; padding-left: 0.5em;">
+            <div class="title" style="font-size: 28px;">
+                Course Name
+            </div>
+
+            <button mat-icon-button aria-label="Example icon button with a home icon">
+                <mat-icon>edit</mat-icon>
+            </button>
+
+        </div>
+
+        <div style="color: dimgray; padding-left: 0.5em; font-size: 12px; padding-top: 4px;">
+            * This name will appear to farmers as course name
+        </div>
+
+        <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
+            <mat-label>A short description about the course</mat-label>
+            <input matInput maxlength="400" placeholder="Crop" #input>
+            <mat-hint align="end">{{input.value.length}} / 400</mat-hint>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
+            <mat-label>The complete description of the course</mat-label>
+            <input matInput maxlength="400" placeholder="Crop" #input>
+            <mat-hint align="end">{{input.value.length}} / 800</mat-hint>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="10" cdkAutosizeMaxRows="15"></textarea>
+        </mat-form-field>
+
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                <button mat-icon-button disabled></button>
+                <mat-checkbox class="checklist-leaf-node" [checked]="checklistSelection.isSelected(node)" (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+            </mat-tree-node>
+
+            <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+                <button mat-icon-button disabled></button>
+                <mat-form-field appearance="fill">
+                    <mat-label>New item...</mat-label>
+                    <input matInput #itemValue placeholder="Ex. Lettuce">
+                </mat-form-field>
+                <button mat-button (click)="saveNode(node, itemValue.value)">Save</button>
+            </mat-tree-node>
+
+            <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.item">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+                <mat-checkbox [checked]="descendantsAllSelected(node)" [indeterminate]="descendantsPartiallySelected(node)" (change)="todoItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+                <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button>
+            </mat-tree-node>
+        </mat-tree>
+
+    </div>
+
+</div>

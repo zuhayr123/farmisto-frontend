@@ -21,7 +21,12 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatSortModule } from '@angular/material/sort';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
-import { DialogContentAdditionComponent } from './dialog-content-addition/dialog-content-addition.component'
+import {MatTreeModule} from '@angular/material/tree';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
+
+import { DialogContentAdditionComponent } from './dialog-content-addition/dialog-content-addition.component';
+import { CourseAddComponentComponent } from './course-add-component/course-add-component.component'
 
 
 @NgModule({
@@ -31,7 +36,8 @@ import { DialogContentAdditionComponent } from './dialog-content-addition/dialog
     CoursesComponent,
     AnalyticsComponent,
     UserDetailsComponent,
-    DialogContentAdditionComponent
+    DialogContentAdditionComponent,
+    CourseAddComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,9 @@ import { DialogContentAdditionComponent } from './dialog-content-addition/dialog
     MatIconModule,
     MatSortModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTreeModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
