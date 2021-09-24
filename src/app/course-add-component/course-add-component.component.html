@@ -1,4 +1,4 @@
-<div style="width: 98%; height: 98%; background-color: white; margin: 1%; border-radius: 20px;">
+<div style="width: 98%; min-height: 98%; background-color: white; margin: 1%; border-radius: 20px;">
 
     <div style="display: flex; flex-direction: row;" class="align_div">
         <button mat-icon-button aria-label="Example icon button with a home icon">
@@ -21,7 +21,7 @@
             </div>
 
             <button mat-icon-button aria-label="Example icon button with a home icon">
-                <mat-icon>edit</mat-icon>
+                <mat-icon style="font-size: 28px;">edit</mat-icon>
             </button>
 
         </div>
@@ -46,12 +46,17 @@
 
         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
-                <button mat-icon-button disabled></button>
+                <button mat-icon-button class="checklist-leaf-node">
+                    <mat-icon color = "warn">delete</mat-icon>
+                </button>
+
+                <button mat-icon-button class="checklist-leaf-node">
+                    <mat-icon>edit</mat-icon>
+                </button>
                 <mat-checkbox class="checklist-leaf-node" [checked]="checklistSelection.isSelected(node)" (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
             </mat-tree-node>
 
             <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
-                <button mat-icon-button disabled></button>
                 <mat-form-field appearance="fill">
                     <mat-label>New item...</mat-label>
                     <input matInput #itemValue placeholder="Ex. Lettuce">
