@@ -5,13 +5,15 @@ import { HomeComponent } from './home/home.component';
 import { CoursesComponent } from './courses/courses.component';
 import { UserDetailsComponent } from './user-details/user-details.component'
 import { CourseAddComponentComponent } from './course-add-component/course-add-component.component';
+import { AddContentInfoComponent } from './add-content-info/add-content-info.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   {path: 'courses',component: CoursesComponent},
   {path: 'add_course', component: CourseAddComponentComponent},
   { path: 'user_details', component: UserDetailsComponent },
-  { path: 'analytics', component: AnalyticsComponent }
+  { path: 'analytics', component: AnalyticsComponent },
+  {path : 'add_course_content', component:AddContentInfoComponent}
 ];
 
 @NgModule({

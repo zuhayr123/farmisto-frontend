@@ -3,6 +3,8 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 export class TodoItemNode {
   children!: TodoItemNode[];
@@ -125,7 +127,7 @@ export class CourseAddComponentComponent implements OnInit{
   /** The selection for checklist */
   checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
 
-  constructor(private _database: ChecklistDatabase) {
+  constructor(private _database: ChecklistDatabase, private router: Router, private route: ActivatedRoute) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<TodoItemFlatNode>(this.getLevel, this.isExpandable);
@@ -135,8 +137,9 @@ export class CourseAddComponentComponent implements OnInit{
       this.dataSource.data = data;
     });
   }
+  
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
   }
 
   getLevel = (node: TodoItemFlatNode) => node.level;
@@ -254,5 +257,9 @@ export class CourseAddComponentComponent implements OnInit{
   saveNode(node: TodoItemFlatNode, itemValue: string) {
     const nestedNode = this.flatNodeMap.get(node);
     this._database.updateItem(nestedNode!, itemValue);
+  }
+
+  addCourseContent(){
+    this.router.navigateByUrl("add_course_content");
   }
 }
