@@ -18,7 +18,6 @@
 
 .align_content {
     padding-left: 3em;
-    padding-top: 3.5em;
 }
 
 .mat-form-field {
@@ -35,5 +34,9 @@
 }
 
 .style_icon_course {
+    font-size: 14px;
+}
+
+.mat-radio-group {
     font-size: 14px;
 }

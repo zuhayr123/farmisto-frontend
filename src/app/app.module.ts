@@ -23,7 +23,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTreeModule} from '@angular/material/tree';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import {MatMenuModule} from '@angular/material/menu';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { DialogContentAdditionComponent } from './dialog-content-addition/dialog-content-addition.component';
 import { CourseAddComponentComponent } from './course-add-component/course-add-component.component';
@@ -62,7 +64,10 @@ import { ChildTextInfoComponent } from './child-text-info/child-text-info.compon
     MatButtonModule,
     MatDialogModule,
     MatTreeModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatMenuModule,
+    MatRadioModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
