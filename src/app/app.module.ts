@@ -27,7 +27,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { DialogContentAdditionComponent } from './dialog-content-addition/dialog-content-addition.component';
 import { CourseAddComponentComponent } from './course-add-component/course-add-component.component';
-import { AddContentInfoComponent } from './add-content-info/add-content-info.component'
+import { AddContentInfoComponent } from './add-content-info/add-content-info.component';
+import { ChildVideoContentInfoComponent } from './child-video-content-info/child-video-content-info.component';
+import { ChildTextInfoComponent } from './child-text-info/child-text-info.component'
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { AddContentInfoComponent } from './add-content-info/add-content-info.com
     UserDetailsComponent,
     DialogContentAdditionComponent,
     CourseAddComponentComponent,
-    AddContentInfoComponent
+    AddContentInfoComponent,
+    ChildVideoContentInfoComponent,
+    ChildTextInfoComponent
   ],
   imports: [
     BrowserModule,
