@@ -27,6 +27,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
+
 import { DialogContentAdditionComponent } from './dialog-content-addition/dialog-content-addition.component';
 import { CourseAddComponentComponent } from './course-add-component/course-add-component.component';
 import { AddContentInfoComponent } from './add-content-info/add-content-info.component';
@@ -67,7 +70,8 @@ import { ChildTextInfoComponent } from './child-text-info/child-text-info.compon
     MatCheckboxModule,
     MatMenuModule,
     MatRadioModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    NgxDropzoneModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,12 +15,12 @@
     </div>
 
     <div class="align_content" style="padding-top: 3.5em;">
-        <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
-            <mat-button-toggle value="bold">
+        <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style" [(ngModel)]="contentType">
+            <mat-button-toggle value="video" (click)="addVideoContent();">
                 <mat-icon>videocam</mat-icon>
                 Video
             </mat-button-toggle>
-            <mat-button-toggle value="italic">
+            <mat-button-toggle value="text" (click)="addTextContent();">
                 <mat-icon>description</mat-icon>
                 Text
             </mat-button-toggle>

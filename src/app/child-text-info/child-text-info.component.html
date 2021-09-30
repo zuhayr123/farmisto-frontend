@@ -15,10 +15,12 @@
         * This name will appear to farmers as text name
     </div>
 
-    <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
-        <mat-label>Video URL</mat-label>
-        <input matInput maxlength="400" placeholder="https://www.youtube.com/watch?v=aFPJf-wKTd0" #input>
-    </mat-form-field>
+    <ngx-dropzone style="margin-top: 1em; width: 69.7%; margin-left: 0.5em;" (change)="onSelect($event)">
+        <ngx-dropzone-label>Click or drop your text files here</ngx-dropzone-label>
+        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-preview>
+    </ngx-dropzone>
 
     <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
         <mat-label>A short description about the course</mat-label>
@@ -33,5 +35,12 @@
         <mat-hint align="end">{{input.value.length}} / 800</mat-hint>
         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="10" cdkAutosizeMaxRows="15"></textarea>
     </mat-form-field>
+
+    <div style="width: 70%; display: flex; justify-content: right;">
+        <button mat-raised-button color="primary" style="height: 2.8em !important; margin-left: 1%; display: flex;">
+            <mat-icon>playlist_add</mat-icon>
+            Submit
+        </button>
+    </div>
 
 </div>
