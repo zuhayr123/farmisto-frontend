@@ -15,7 +15,7 @@ export class AppComponent {
   }
 
 
-  title = 'farmistoFrotend';
+  title = 'farmisto-frotend';
   typesOfShoes: string[] = ['Home', 'Courses', 'Analytics', 'User Details', 'Sneakers', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   image_list: string[] = ['/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
 
