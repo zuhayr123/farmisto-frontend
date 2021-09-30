@@ -1,0 +1,42 @@
+.align_div {
+    padding-top: 1.5em;
+    padding-left: 1em;
+    align-items: center;
+}
+
+.title {
+    margin-top: 2px;
+    font-weight: bold;
+    font-size: large;
+}
+
+.description {
+    padding-top: 0.8em;
+    padding-left: 3.5em;
+    color: dimgray;
+}
+
+.align_content {
+    padding-left: 3em;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 70%;
+}
+
+.mat-form-field {
+    margin-right: 4px;
+}
+
+.mat-icon {
+    font-size: 20px;
+}
+
+.style_icon_course {
+    font-size: 14px;
+}
+
+.mat-radio-group {
+    font-size: 14px;
+}
