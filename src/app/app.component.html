@@ -1,90 +1,55 @@
 <div>
-  <mat-toolbar>
-    <mat-toolbar-row>
-      <span style="cursor: pointer; display: flex; justify-content: center; align-items: center;">
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <span style="cursor: pointer; display: flex; justify-content: center; align-items: center;">
         <img src="/assets/images/farmisto-logo-78x100.png" style="max-height: 3em;">
       </span>
 
-      <div style="padding-left: 1vw;">
-        Content Control Portal
-      </div>
-
-      <!-- <div fxShow="true" fxHide.lt-md="true">
-
-        <a mat-button (click)="navigateToAboutUs()">
-          <mat-icon>account_box</mat-icon>
-          About Us
-        </a>
-
-        <a mat-button [matMenuTriggerFor]="employers">
-          <mat-icon>keyboard_arrow_down</mat-icon>
-          For Employers
-        </a>
-        <mat-menu #employers="matMenu">
-          <button mat-menu-item (click)="navigateToEmployer();">Post Job Requirement</button>
-          <button mat-menu-item (click)="navigateToIndustries();">Industries We Serve</button>
-        </mat-menu>
-
-        <a mat-button [matMenuTriggerFor]="employees">
-          <mat-icon>keyboard_arrow_down</mat-icon>
-          For Employees
-        </a>
-        <mat-menu #employees="matMenu">
-          <button mat-menu-item (click)="navigateToJobs()">Current Jobs</button>
-          <button mat-menu-item (click)="navigateToEmployee()">Post Your Resume</button>
-        </mat-menu>
-
-
-        <a mat-button [matMenuTriggerFor]="services">
-          <mat-icon>keyboard_arrow_down</mat-icon>
-          Our Services
-        </a>
-
-        <mat-menu #services="matMenu">
-          <button mat-menu-item (click)="navigateToServices('PlacementConsultant')">Placement
-            Consultant</button>
-          <button mat-menu-item (click)="navigateToServices('HRConsultant')">HR Consultant</button>
-          <button mat-menu-item (click)="navigateToServices('ManpowerRecruitment')">Manpower Recruitment</button>
-          <button mat-menu-item (click)="navigateToServices('CareerConsultant')">Career Consultant</button>
-          <button mat-menu-item (click)="navigateToServices('CorporateTraining')">Corporate
-            Training</button>
-          <button mat-menu-item (click)="navigateToServices('EducationalConsultant')">Educational
-            Consultant</button>
-          <button mat-menu-item (click)="navigateToServices('ImmigrationConsultant')">Immigration
-            Consultant</button>
-          <button mat-menu-item (click)="navigateToServices('SecurityServices')">Security Services</button>
-          <button mat-menu-item (click)="navigateToServices('HousekeepingServices')">Housekeeping
-            Services</button>
-        </mat-menu>
-
-        <a mat-button (click)="navigateToBottom()">
-          <mat-icon>account_box</mat-icon>
-          Contact Us
-        </a>
-
-        <button mat-raised-button class="contrast-button" (click)="openDialog()">Admin</button>
-      </div> -->
-    </mat-toolbar-row>
-  </mat-toolbar>
-
-  <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" opened style="width: 16em;">
-      <mat-selection-list #portal [multiple]="false" (selectionChange)="onPortalChange(portal.selectedOptions.selected[0]);">
-        <mat-list-option *ngFor="let dashboard_element of dashboardPopulator" [value]="dashboard_element">
-          <div style="display: flex; flex-direction: row;">
-
-            <img src={{dashboard_element.image_src}} height="20em">
-            <div style="padding-left: 1em;">
-              {{dashboard_element.title}}
+            <div style="width: 100%;">
+                <div style="padding-left: 1vw;">
+                    Content Control Portal
+                </div>
             </div>
-          </div>
-        </mat-list-option>
-      </mat-selection-list>
-    </mat-drawer>
-    <mat-drawer-content>
-      <router-outlet>
 
-      </router-outlet>
-    </mat-drawer-content>
-  </mat-drawer-container>
+            <button mat-flat-button style="font-size: 14px; color: green;">
+        <mat-icon>admin_panel_settings</mat-icon>
+        Admin
+      </button>
+
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+                <button mat-menu-item disabled>
+          <mat-icon>notifications</mat-icon>
+          <span>Notifications</span>
+        </button>
+            </mat-menu>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-drawer-container class="example-container">
+        <mat-drawer mode="side" opened style="width: 16em;">
+            <mat-selection-list #portal [multiple]="false" (selectionChange)="onPortalChange(portal.selectedOptions.selected[0]);">
+                <mat-list-option *ngFor="let dashboard_element of dashboardPopulator" [value]="dashboard_element">
+                    <div style="display: flex; flex-direction: row;">
+
+                        <img src={{dashboard_element.image_src}} height="20em">
+                        <div style="padding-left: 1em;">
+                            {{dashboard_element.title}}
+                        </div>
+                    </div>
+                </mat-list-option>
+            </mat-selection-list>
+        </mat-drawer>
+        <mat-drawer-content>
+            <router-outlet>
+
+            </router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
 </div>
