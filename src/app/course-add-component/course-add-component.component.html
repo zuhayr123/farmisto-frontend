@@ -58,7 +58,6 @@
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button mat-flat-button (click)="addCourseContent();">{{node.item}}</button>
-                <!-- <mat-checkbox class="checklist-leaf-node" [checked]="checklistSelection.isSelected(node)" (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox> -->
             </mat-tree-node>
 
             <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
