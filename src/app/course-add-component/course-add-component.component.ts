@@ -157,10 +157,19 @@ export class CourseAddComponentComponent implements OnInit {
       : new TodoItemFlatNode();
     flatNode.item = node.item;
     flatNode.level = level;
-    flatNode.expandable = true;                   // edit this to true to make it always expandable
+    if(level<3){
+      flatNode.expandable = true;
+    }
+
+    else{
+      flatNode.expandable = false;
+    }
+    // edit this to true to make it always expandable
     flatNode.hasChild = !!node.children?.length;
     this.flatNodeMap.set(flatNode, node);
     this.nestedNodeMap.set(node, flatNode);
+
+    console.log("level : " + level + "expandable" + !!node.children?.length)
     return flatNode;
   }
 
