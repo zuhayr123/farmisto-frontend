@@ -24,14 +24,7 @@ export class TodoItemFlatNode {
  */
 const TREE_DATA = {
   CourseName: {
-    Chapter01: {
-      SubChapter01: ['Content 01', 'Content 02'],
-      SubChapter02: ['Content 03', 'Content 04']
-    },
-    Chapter02: {
-      SubChapter01: ['Content 05', 'Content 06'],
-      SubChapter02: ['Content 07', 'Content 08']
-    }
+    
   }
 };
 
