@@ -16,6 +16,7 @@ export class TodoItemFlatNode {
   item!: string;
   level!: number;
   expandable!: boolean;
+  hasChild!: boolean;
 }
 
 /**
@@ -82,10 +83,9 @@ export class ChecklistDatabase {
 
   /** Add an item to to-do list */
   insertItem(parent: TodoItemNode, name: string) {
-    if (parent.children) {
-      parent.children.push({ item: name } as TodoItemNode);
-      this.dataChange.next(this.data);
-    }
+    if (!parent.children) parent.children = [];
+    parent.children.push({ item: name } as TodoItemNode);
+    this.dataChange.next(this.data);
   }
 
   updateItem(node: TodoItemNode, name: string) {
@@ -100,7 +100,7 @@ export class ChecklistDatabase {
   styleUrls: ['./course-add-component.component.css'],
   providers: [ChecklistDatabase]
 })
-export class CourseAddComponentComponent implements OnInit{
+export class CourseAddComponentComponent implements OnInit {
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
 
@@ -132,7 +132,7 @@ export class CourseAddComponentComponent implements OnInit{
       this.dataSource.data = data;
     });
   }
-  
+
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
   }
@@ -157,7 +157,8 @@ export class CourseAddComponentComponent implements OnInit{
       : new TodoItemFlatNode();
     flatNode.item = node.item;
     flatNode.level = level;
-    flatNode.expandable = !!node.children?.length;
+    flatNode.expandable = true;                   // edit this to true to make it always expandable
+    flatNode.hasChild = !!node.children?.length;
     this.flatNodeMap.set(flatNode, node);
     this.nestedNodeMap.set(node, flatNode);
     return flatNode;
@@ -188,6 +189,7 @@ export class CourseAddComponentComponent implements OnInit{
     const parentNode = this.flatNodeMap.get(node);
     this._database.insertItem(parentNode!, '');
     this.treeControl.expand(node);
+    console.log("add new item was clicked");
   }
 
   /** Save the node to database */
@@ -196,7 +198,13 @@ export class CourseAddComponentComponent implements OnInit{
     this._database.updateItem(nestedNode!, itemValue);
   }
 
-  addCourseContent(){
+  /** Save the node to database */
+  saveNodeBranch(node: TodoItemFlatNode, itemValue: string) {
+    const nestedNode = this.flatNodeMap.get(node);
+    this._database.updateItem(nestedNode!, itemValue);
+  }
+
+  addCourseContent() {
     this.router.navigateByUrl("add_course_content");
   }
 }
