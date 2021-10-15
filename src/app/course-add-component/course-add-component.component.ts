@@ -97,6 +97,7 @@ export class ChecklistDatabase {
 export class CourseAddComponentComponent implements OnInit {
 
   courseName : string = "null"
+  hide = false;
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
 
@@ -131,7 +132,13 @@ export class CourseAddComponentComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.service.courseName);
-    this.courseName = this.service.courseName;
+    if(this.service.courseName != ""){
+      this.courseName = this.service.courseName;
+    }
+
+    else{
+      this.courseName = "New Course"
+    }
     // throw new Error('Method not implemented.');
   }
 
