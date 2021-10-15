@@ -4,6 +4,7 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CreateCourseService } from '../create-course.service';
 
 
 export class TodoItemNode {
@@ -94,6 +95,8 @@ export class ChecklistDatabase {
   providers: [ChecklistDatabase]
 })
 export class CourseAddComponentComponent implements OnInit {
+
+  courseName : string = "null"
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
 
@@ -115,7 +118,7 @@ export class CourseAddComponentComponent implements OnInit {
   /** The selection for checklist */
   checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
 
-  constructor(private _database: ChecklistDatabase, private router: Router, private route: ActivatedRoute) {
+  constructor(private _database: ChecklistDatabase, private router: Router, private route: ActivatedRoute, public service : CreateCourseService) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<TodoItemFlatNode>(this.getLevel, this.isExpandable);
@@ -127,6 +130,8 @@ export class CourseAddComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.service.courseName);
+    this.courseName = this.service.courseName;
     // throw new Error('Method not implemented.');
   }
 

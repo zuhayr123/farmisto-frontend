@@ -35,6 +35,7 @@ import { CourseAddComponentComponent } from './course-add-component/course-add-c
 import { AddContentInfoComponent } from './add-content-info/add-content-info.component';
 import { ChildVideoContentInfoComponent } from './child-video-content-info/child-video-content-info.component';
 import { ChildTextInfoComponent } from './child-text-info/child-text-info.component'
+import { CreateCourseService } from './create-course.service';
 
 
 @NgModule({
@@ -73,7 +74,7 @@ import { ChildTextInfoComponent } from './child-text-info/child-text-info.compon
     MatButtonToggleModule,
     NgxDropzoneModule
   ],
-  providers: [],
+  providers: [CreateCourseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

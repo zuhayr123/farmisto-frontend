@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CreateCourseService } from '../create-course.service';
 
 @Component({
   selector: 'app-dialog-content-addition',
@@ -8,12 +9,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class DialogContentAdditionComponent implements OnInit {
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  public courseName: string = "null";
+
+  constructor(private router: Router, private route: ActivatedRoute, public service : CreateCourseService) { }
 
   ngOnInit(): void {
   }
 
   addCourse(){
+    console.log(this.courseName)
+    this.service.courseName = this.courseName
     this.router.navigate(['add_course'], {relativeTo:this.route});
   }
 
