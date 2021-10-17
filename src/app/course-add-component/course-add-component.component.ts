@@ -25,7 +25,7 @@ export class TodoItemFlatNode {
  */
 const TREE_DATA = {
   CourseName: {
-    
+
   }
 };
 
@@ -96,7 +96,7 @@ export class ChecklistDatabase {
 })
 export class CourseAddComponentComponent implements OnInit {
 
-  courseName : string = "null"
+  courseName: string = "null"
   hide = false;
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
@@ -119,7 +119,7 @@ export class CourseAddComponentComponent implements OnInit {
   /** The selection for checklist */
   checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
 
-  constructor(private _database: ChecklistDatabase, private router: Router, private route: ActivatedRoute, public service : CreateCourseService) {
+  constructor(private _database: ChecklistDatabase, private router: Router, private route: ActivatedRoute, public service: CreateCourseService) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<TodoItemFlatNode>(this.getLevel, this.isExpandable);
@@ -132,11 +132,11 @@ export class CourseAddComponentComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.service.courseName);
-    if(this.service.courseName != ""){
+    if (this.service.courseName != "") {
       this.courseName = this.service.courseName;
     }
 
-    else{
+    else {
       this.courseName = "New Course"
     }
     // throw new Error('Method not implemented.');
@@ -162,11 +162,11 @@ export class CourseAddComponentComponent implements OnInit {
       : new TodoItemFlatNode();
     flatNode.item = node.item;
     flatNode.level = level;
-    if(level<3){
+    if (level < 3) {
       flatNode.expandable = true;
     }
 
-    else{
+    else {
       flatNode.expandable = false;
     }
     // edit this to true to make it always expandable
@@ -203,7 +203,7 @@ export class CourseAddComponentComponent implements OnInit {
     const parentNode = this.flatNodeMap.get(node);
     this._database.insertItem(parentNode!, '');
     this.treeControl.expand(node);
-    console.log("add new item was clicked");
+    this.checkData();
   }
 
   /** Save the node to database */
@@ -212,10 +212,11 @@ export class CourseAddComponentComponent implements OnInit {
     this._database.updateItem(nestedNode!, itemValue);
   }
 
-  /** Save the node to database */
-  saveNodeBranch(node: TodoItemFlatNode, itemValue: string) {
-    const nestedNode = this.flatNodeMap.get(node);
-    this._database.updateItem(nestedNode!, itemValue);
+  checkData() {
+    console.log("checkdata was called")
+    this.treeControl.dataNodes.forEach(item => {
+      console.log("item was " + item.item + " and its level is " + item.level)
+    })
   }
 
   addCourseContent() {

@@ -17,14 +17,6 @@
     <div class="align_content">
         <div [ngClass]="hide ? 'field_in_focus' : 'field_not_in_focus'">
 
-            <!-- <mat-form-field appearance="fill" style="width: 100%;">
-                <mat-label>Course Name</mat-label>
-                <input matInput [(ngModel)]="courseName" [disabled]="hide">
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                  <mat-icon>{{hide ? 'edit' : 'save'}}</mat-icon>
-                </button>
-            </mat-form-field> -->
-
             <div style="font-size: 28px;" [attr.contenteditable]="hide" class="title">
                 {{courseName}}
             </div>
