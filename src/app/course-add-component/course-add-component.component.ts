@@ -5,6 +5,7 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import { BehaviorSubject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CreateCourseService } from '../create-course.service';
+import { CourseContentTreeModel } from '../map-models/course_content_tree';
 
 
 export class TodoItemNode {
@@ -95,6 +96,8 @@ export class ChecklistDatabase {
   providers: [ChecklistDatabase]
 })
 export class CourseAddComponentComponent implements OnInit {
+
+  courseContentTreeModel! : CourseContentTreeModel
 
   courseName: string = "null"
   hide = false;
@@ -214,8 +217,12 @@ export class CourseAddComponentComponent implements OnInit {
 
   checkData() {
     console.log("checkdata was called")
-    this.treeControl.dataNodes.forEach(item => {
-      console.log("item was " + item.item + " and its level is " + item.level)
+
+    this.dataSource.data.forEach(item => {
+      item.children.forEach(item => {
+        console.log("children item was  " + item.item)
+      })
+      console.log("the item seem was " + item.item)
     })
   }
 
