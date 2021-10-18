@@ -97,7 +97,7 @@ export class ChecklistDatabase {
 })
 export class CourseAddComponentComponent implements OnInit {
 
-  courseContentTreeModel! : CourseContentTreeModel
+  courseContentTreeModel!: CourseContentTreeModel
 
   courseName: string = "null"
   hide = false;
@@ -219,9 +219,21 @@ export class CourseAddComponentComponent implements OnInit {
     console.log("checkdata was called")
 
     this.dataSource.data.forEach(item => {
-      item.children.forEach(item => {
-        console.log("children item was  " + item.item)
-      })
+      if (item.children != null) {
+        item.children.forEach(item => {
+          if (item.children != null) {
+            item.children.forEach(item => {
+              if (item.children != null) {
+                item.children.forEach(item => {
+                  console.log("children of children of CHILDREN item was  " + item.item)
+                })
+              }
+              console.log("children of children item was  " + item.item)
+            })
+          }
+          console.log("children item was  " + item.item)
+        })
+      }
       console.log("the item seem was " + item.item)
     })
   }
