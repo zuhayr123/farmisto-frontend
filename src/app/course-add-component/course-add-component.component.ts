@@ -219,12 +219,17 @@ export class CourseAddComponentComponent implements OnInit {
     console.log("checkdata was called")
 
     this.dataSource.data.forEach(item => {
+      console.log("this was the first loop and item was " + item.item)
+      //course name
       if (item.children != null) {
         item.children.forEach(item => {
+          //chapter
           if (item.children != null) {
             item.children.forEach(item => {
+              //sub-chapter
               if (item.children != null) {
                 item.children.forEach(item => {
+                  //content
                   console.log("children of children of CHILDREN item was  " + item.item)
                 })
               }
