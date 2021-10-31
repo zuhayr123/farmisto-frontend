@@ -97,7 +97,7 @@ export class ChecklistDatabase {
 })
 export class CourseAddComponentComponent implements OnInit {
 
-  courseContentTreeModel!: CourseContentTreeModel
+  courseContentTreeModel: CourseContentTreeModel = new CourseContentTreeModel()
 
   courseName: string = "null"
   hide = false;
@@ -207,6 +207,9 @@ export class CourseAddComponentComponent implements OnInit {
     this._database.insertItem(parentNode!, '');
     this.treeControl.expand(node);
     this.checkData();
+
+    var data_string = JSON.stringify(this._database.data);
+    console.log("data got from json was called" + data_string);
   }
 
   /** Save the node to database */
@@ -217,30 +220,30 @@ export class CourseAddComponentComponent implements OnInit {
 
   checkData() {
     console.log("checkdata was called")
-
-    this.dataSource.data.forEach(item => {
-      console.log("this was the first loop and item was " + item.item)
+    this.dataSource.data.forEach((item, index) => {
+      console.log("course name added was " + item.item + " and index was " + index);
+      // this.courseContentTreeModel.course_name = item.item;
       //course name
       if (item.children != null) {
-        item.children.forEach(item => {
+        item.children.forEach((item, chapter_index) => {
+          console.log("chapter name added was " + item.item + " and index was " + chapter_index);
+          // this.courseContentTreeModel.chapter_list[chapter_index].chapter_title = item.item
           //chapter
           if (item.children != null) {
-            item.children.forEach(item => {
+            item.children.forEach((item, sub_chapter_index) => {
+              // this.courseContentTreeModel.chapter_list[chapter_index].sub_chapter_list[sub_chapter_index].sub_chapter_title = item.item
               //sub-chapter
               if (item.children != null) {
-                item.children.forEach(item => {
+                item.children.forEach((item, content_index) => {
                   //content
-                  console.log("children of children of CHILDREN item was  " + item.item)
+                  // this.courseContentTreeModel.chapter_list[chapter_index].sub_chapter_list[sub_chapter_index].content_list[content_index].content_title = item.item
                 })
               }
-              console.log("children of children item was  " + item.item)
-            })
+            });
           }
-          console.log("children item was  " + item.item)
-        })
+        });
       }
-      console.log("the item seem was " + item.item)
-    })
+    });
   }
 
   addCourseContent() {
