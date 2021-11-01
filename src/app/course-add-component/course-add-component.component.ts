@@ -207,8 +207,10 @@ export class CourseAddComponentComponent implements OnInit {
     this._database.insertItem(parentNode!, '');
     this.treeControl.expand(node);
     this.checkData();
+    var data_string = JSON.stringify(this._database.data[0]);
 
-    var data_string = JSON.stringify(this._database.data);
+    this.courseContentTreeModel = this._database.data[0] as any
+
     console.log("data got from json was called" + data_string);
   }
 

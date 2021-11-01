@@ -1,0 +1,30 @@
+{
+    "item": "CourseName",
+    "children": [{
+            "item": "Chapter - 01",
+            "children": [{
+                    "item": "Sub Chapter 01",
+                    "children": [{
+                            "item": "Content 01"
+                        },
+                        {
+                            "item": "Content 02"
+                        },
+                        {
+                            "item": ""
+                        }
+                    ]
+                },
+                {
+                    "item": "Sub Chapter 02"
+                }
+            ]
+        },
+        {
+            "item": "Chapter - 02"
+        },
+        {
+            "item": "Chapter - 03"
+        }
+    ]
+}
