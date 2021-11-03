@@ -11,6 +11,8 @@ import { CourseContentTreeModel } from '../map-models/course_content_tree';
 export class TodoItemNode {
   children!: TodoItemNode[];
   item!: string;
+  content_type!: string;
+  content_id!: string;
 }
 
 /** Flat to-do item node with expandable and level information */
@@ -79,7 +81,8 @@ export class ChecklistDatabase {
   /** Add an item to to-do list */
   insertItem(parent: TodoItemNode, name: string) {
     if (!parent.children) parent.children = [];
-    parent.children.push({ item: name } as TodoItemNode);
+    var currentTimeInMilliseconds = Date.now();
+    parent.children.push({ item: name, content_id: currentTimeInMilliseconds.toString() } as TodoItemNode);
     this.dataChange.next(this.data);
   }
 
@@ -203,49 +206,34 @@ export class CourseAddComponentComponent implements OnInit {
 
   /** Select the category so we can insert the new item. */
   addNewItem(node: TodoItemFlatNode) {
-    const parentNode = this.flatNodeMap.get(node);
+    var parentNode = this.flatNodeMap.get(node);
     this._database.insertItem(parentNode!, '');
     this.treeControl.expand(node);
-    this.checkData();
-    var data_string = JSON.stringify(this._database.data[0]);
-
-    this.courseContentTreeModel = this._database.data[0] as any
-
-    console.log("data got from json was called" + data_string);
   }
 
   /** Save the node to database */
   saveNode(node: TodoItemFlatNode, itemValue: string) {
     const nestedNode = this.flatNodeMap.get(node);
-    this._database.updateItem(nestedNode!, itemValue);
-  }
 
-  checkData() {
-    console.log("checkdata was called")
-    this.dataSource.data.forEach((item, index) => {
-      console.log("course name added was " + item.item + " and index was " + index);
-      // this.courseContentTreeModel.course_name = item.item;
-      //course name
-      if (item.children != null) {
-        item.children.forEach((item, chapter_index) => {
-          console.log("chapter name added was " + item.item + " and index was " + chapter_index);
-          // this.courseContentTreeModel.chapter_list[chapter_index].chapter_title = item.item
-          //chapter
-          if (item.children != null) {
-            item.children.forEach((item, sub_chapter_index) => {
-              // this.courseContentTreeModel.chapter_list[chapter_index].sub_chapter_list[sub_chapter_index].sub_chapter_title = item.item
-              //sub-chapter
-              if (item.children != null) {
-                item.children.forEach((item, content_index) => {
-                  //content
-                  // this.courseContentTreeModel.chapter_list[chapter_index].sub_chapter_list[sub_chapter_index].content_list[content_index].content_title = item.item
-                })
-              }
-            });
-          }
-        });
-      }
-    });
+    if (this.getLevel(node) == 1) {
+      nestedNode!.content_type = "chapter"
+    }
+
+    else if (this.getLevel(node) == 2) {
+      nestedNode!.content_type = "sub-chapter"
+    }
+
+    else if (this.getLevel(node) == 3) {
+      nestedNode!.content_type = "content"
+    }
+
+    var data_string = JSON.stringify(this._database.data[0]);
+
+    this.courseContentTreeModel = this._database.data[0] as any
+
+    console.log("data got from json was called" + data_string);
+    
+    this._database.updateItem(nestedNode!, itemValue);
   }
 
   addCourseContent() {
