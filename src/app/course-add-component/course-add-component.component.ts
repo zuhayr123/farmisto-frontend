@@ -112,7 +112,8 @@ export class CourseAddComponentComponent implements OnInit {
 
   courseContentTreeModel: CourseContentTreeModel = new CourseContentTreeModel()
 
-  courseName: string = "null"
+  courseName!: string;
+  category!: string;
   hide = false;
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
@@ -177,8 +178,6 @@ export class CourseAddComponentComponent implements OnInit {
         startWith(''),
         map(value => this._filterGroup(value))
       );
-
-      
     // throw new Error('Method not implemented.');
   }
 
@@ -279,6 +278,40 @@ export class CourseAddComponentComponent implements OnInit {
     this.service.getSuggestions().subscribe((res) => {
       this.service.courseCategoryModel = res as CourseCategoryModel;
     });
+  }
+
+  onSubmit() {
+    this.service.courseContentTreeModel.category_id = this.findCategory(this.category).category_id;
+    this.service.courseContentTreeModel.category_name = this.findCategory(this.category).category_name;
+
+    console.log("the data on submit as seen was " + JSON.stringify(this.service.courseContentTreeModel))
+  }
+
+  findCategory(catgeories: string): ({
+    category_name: string;
+    category_id: string;
+  }) {
+    var category_name_selected: string;
+    var category_id_selected: string = "";
+
+    this.service.courseCategoryModel.state_group.forEach(element => {
+      element.category.forEach(catgeoryType => {
+        if (catgeoryType.category_name == catgeories) {
+          category_id_selected = catgeoryType.category_id;
+          category_name_selected = catgeoryType.category_name;
+          console.log("found the category");
+        }
+      });
+    });
+
+    if (category_id_selected != undefined && category_id_selected != "") {
+      return { category_name: catgeories, category_id: category_id_selected };
+    }
+
+    else {
+      return { category_name: catgeories, category_id: Date.now().toString() };
+    }
+
   }
 
   private _filterGroup(value: string): ({

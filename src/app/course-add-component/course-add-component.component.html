@@ -28,13 +28,18 @@
         </div>
 
         <div style="color: dimgray; padding-left: 0.5em; font-size: 12px; padding-top: 4px;">
-            * This name will appear to farmers as course name
+            * This name will appear to farmers as course name {{category}}
         </div>
 
+        <button mat-raised-button color="primary" style="height: 2.8em !important; display: flex; justify-content: center;" (click)="onSubmit();">
+            <mat-icon>add</mat-icon>
+            Add Course
+        </button>
+
         <form [formGroup]="stateForm">
-            <mat-form-field appearance="fill">
-                <mat-label>States Group</mat-label>
-                <input type="text" matInput formControlName="stateGroup" required [matAutocomplete]="autoGroup">
+            <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
+                <mat-label>Course Category</mat-label>
+                <input type="text" [(ngModel)]="category" matInput formControlName="stateGroup" required [matAutocomplete]="autoGroup">
                 <mat-autocomplete #autoGroup="matAutocomplete">
                     <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter">
                         <mat-option *ngFor="let name of group.category" [value]="name.category_name">
