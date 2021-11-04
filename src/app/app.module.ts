@@ -8,8 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms'
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
-
+import {HttpClientModule} from '@angular/common/http';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSelectModule} from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -63,6 +64,7 @@ import { CreateCourseService } from './create-course.service';
     MatSidenavModule,
     MatListModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     MatTableModule,
     MatFormFieldModule,
@@ -77,7 +79,9 @@ import { CreateCourseService } from './create-course.service';
     MatMenuModule,
     MatRadioModule,
     MatButtonToggleModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    MatSelectModule,
+    MatAutocompleteModule
   ],
   providers: [CreateCourseService],
   bootstrap: [AppComponent]

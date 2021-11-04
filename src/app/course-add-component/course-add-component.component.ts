@@ -6,6 +6,16 @@ import { BehaviorSubject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CreateCourseService } from '../create-course.service';
 import { CourseContentTreeModel } from '../map-models/course_content_tree';
+import { CourseCategoryModel } from '../map-models/course_category_model';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+
+export const _filter = (category: [{ category_name: string; category_id: string; }], value: string): ({ category_name: string; category_id: string; }[]) => {
+  const filterValue = value.toLowerCase();
+
+  return category.filter(item => item.category_name.toLowerCase().includes(filterValue));
+};
 
 
 export class TodoItemNode {
@@ -125,7 +135,7 @@ export class CourseAddComponentComponent implements OnInit {
   /** The selection for checklist */
   checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
 
-  constructor(private _database: ChecklistDatabase, private router: Router, private route: ActivatedRoute, public service: CreateCourseService) {
+  constructor(private _database: ChecklistDatabase, private router: Router, private route: ActivatedRoute, public service: CreateCourseService, private _formBuilder: FormBuilder) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<TodoItemFlatNode>(this.getLevel, this.isExpandable);
@@ -136,15 +146,39 @@ export class CourseAddComponentComponent implements OnInit {
     });
   }
 
+  stateForm: FormGroup = this._formBuilder.group({
+    stateGroup: '',
+  });
+
+  stateGroupOptions!: Observable<({
+    letter: string;
+    category: {
+      category_name: string;
+      category_id: string;
+    }[]
+  }[])>;
+
   ngOnInit(): void {
-    console.log(this.service.courseName);
-    if (this.service.courseName != "") {
-      this.courseName = this.service.courseName;
+    this.getSugestions();
+    console.log("the course name was " + this.service.courseContentTreeModel.course_name);
+
+    this.service.courseContentTreeModel.course_id = Date.now().toString();
+    if (this.service.courseContentTreeModel.course_name != "" && this.service.courseContentTreeModel.course_name != undefined) {
+      console.log("The code reached inside the bloc");
+      this.courseName = this.service.courseContentTreeModel.course_name;
     }
 
     else {
       this.courseName = "New Course"
     }
+
+    this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filterGroup(value))
+      );
+
+      
     // throw new Error('Method not implemented.');
   }
 
@@ -227,17 +261,39 @@ export class CourseAddComponentComponent implements OnInit {
       nestedNode!.content_type = "content"
     }
 
-    this.courseContentTreeModel.children = this._database.data[0].children as any
+    this.courseContentTreeModel.children = this._database.data[0].children as any;
 
-    this.courseContentTreeModel.course_name = this.courseName;
     var data_string = JSON.stringify(this.courseContentTreeModel);
 
+
     console.log("data got from json was called" + data_string);
-    
+
     this._database.updateItem(nestedNode!, itemValue);
   }
 
   addCourseContent() {
     this.router.navigateByUrl("add_course_content");
+  }
+
+  getSugestions() {
+    this.service.getSuggestions().subscribe((res) => {
+      this.service.courseCategoryModel = res as CourseCategoryModel;
+    });
+  }
+
+  private _filterGroup(value: string): ({
+    letter: string;
+    category: {
+      category_name: string;
+      category_id: string;
+    }[]
+  }[]) {
+    if (value) {
+      return this.service.courseCategoryModel.state_group
+        .map(group => ({ letter: group.letter, category: _filter(group.category, value) }))
+        .filter(group => group.category.length > 0);
+    }
+
+    return this.service.courseCategoryModel.state_group;
   }
 }
