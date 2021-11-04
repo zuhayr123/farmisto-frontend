@@ -227,9 +227,10 @@ export class CourseAddComponentComponent implements OnInit {
       nestedNode!.content_type = "content"
     }
 
-    var data_string = JSON.stringify(this._database.data[0]);
+    this.courseContentTreeModel.children = this._database.data[0].children as any
 
-    this.courseContentTreeModel = this._database.data[0] as any
+    this.courseContentTreeModel.course_name = this.courseName;
+    var data_string = JSON.stringify(this.courseContentTreeModel);
 
     console.log("data got from json was called" + data_string);
     
