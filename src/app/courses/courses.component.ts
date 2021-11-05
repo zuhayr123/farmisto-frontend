@@ -14,7 +14,7 @@ import { CourseContentTreeModel } from '../map-models/course_content_tree';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'category', 'enrollment'];
+  displayedColumns: string[] = ['id', 'name', 'category', 'enroll_status'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator)
