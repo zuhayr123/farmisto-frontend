@@ -16,7 +16,6 @@ export class CreateCourseService {
   _url_submit_content_list = this.base_url + '/course/course_info';
   courseName: string = ""
 
-
   constructor(private _http: HttpClient) { }
 
   courseContentTreeModel: CourseContentTreeModel = new CourseContentTreeModel();
