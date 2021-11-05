@@ -110,10 +110,10 @@ export class ChecklistDatabase {
 })
 export class CourseAddComponentComponent implements OnInit {
 
-  courseContentTreeModel: CourseContentTreeModel = new CourseContentTreeModel()
-
   courseName!: string;
   category!: string;
+  short_info!: string;
+  long_info!: string;
   hide = false;
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
@@ -260,9 +260,9 @@ export class CourseAddComponentComponent implements OnInit {
       nestedNode!.content_type = "content"
     }
 
-    this.courseContentTreeModel.children = this._database.data[0].children as any;
+    this.service.courseContentTreeModel.children = this._database.data[0].children as any;
 
-    var data_string = JSON.stringify(this.courseContentTreeModel);
+    var data_string = JSON.stringify(this.service.courseContentTreeModel);
 
 
     console.log("data got from json was called" + data_string);
@@ -283,6 +283,13 @@ export class CourseAddComponentComponent implements OnInit {
   onSubmit() {
     this.service.courseContentTreeModel.category_id = this.findCategory(this.category).category_id;
     this.service.courseContentTreeModel.category_name = this.findCategory(this.category).category_name;
+    this.service.courseContentTreeModel.course_short_info = this.short_info;
+    this.service.courseContentTreeModel.course_long_description = this.long_info;
+    this.service.courseContentTreeModel.course_name = this.courseName;
+
+    this.service.submitData(this.service.courseContentTreeModel).subscribe(
+      data => console.log("Success", data),
+      error => console.error("Error", error));
 
     console.log("the data on submit as seen was " + JSON.stringify(this.service.courseContentTreeModel))
   }
