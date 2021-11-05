@@ -5,11 +5,24 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import { BehaviorSubject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CreateCourseService } from '../create-course.service';
+import { CourseContentTreeModel } from '../map-models/course_content_tree';
+import { CourseCategoryModel } from '../map-models/course_category_model';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+
+export const _filter = (category: [{ category_name: string; category_id: string; }], value: string): ({ category_name: string; category_id: string; }[]) => {
+  const filterValue = value.toLowerCase();
+
+  return category.filter(item => item.category_name.toLowerCase().includes(filterValue));
+};
 
 
 export class TodoItemNode {
   children!: TodoItemNode[];
   item!: string;
+  content_type!: string;
+  content_id!: string;
 }
 
 /** Flat to-do item node with expandable and level information */
@@ -25,7 +38,7 @@ export class TodoItemFlatNode {
  */
 const TREE_DATA = {
   CourseName: {
-    
+
   }
 };
 
@@ -78,7 +91,8 @@ export class ChecklistDatabase {
   /** Add an item to to-do list */
   insertItem(parent: TodoItemNode, name: string) {
     if (!parent.children) parent.children = [];
-    parent.children.push({ item: name } as TodoItemNode);
+    var currentTimeInMilliseconds = Date.now();
+    parent.children.push({ item: name, content_id: currentTimeInMilliseconds.toString() } as TodoItemNode);
     this.dataChange.next(this.data);
   }
 
@@ -96,7 +110,11 @@ export class ChecklistDatabase {
 })
 export class CourseAddComponentComponent implements OnInit {
 
-  courseName : string = "null"
+  courseName!: string;
+  category!: string;
+  short_info!: string;
+  long_info!: string;
+  hide = false;
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
 
@@ -118,7 +136,7 @@ export class CourseAddComponentComponent implements OnInit {
   /** The selection for checklist */
   checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
 
-  constructor(private _database: ChecklistDatabase, private router: Router, private route: ActivatedRoute, public service : CreateCourseService) {
+  constructor(private _database: ChecklistDatabase, private router: Router, private route: ActivatedRoute, public service: CreateCourseService, private _formBuilder: FormBuilder) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<TodoItemFlatNode>(this.getLevel, this.isExpandable);
@@ -129,9 +147,37 @@ export class CourseAddComponentComponent implements OnInit {
     });
   }
 
+  stateForm: FormGroup = this._formBuilder.group({
+    stateGroup: '',
+  });
+
+  stateGroupOptions!: Observable<({
+    letter: string;
+    category: {
+      category_name: string;
+      category_id: string;
+    }[]
+  }[])>;
+
   ngOnInit(): void {
-    console.log(this.service.courseName);
-    this.courseName = this.service.courseName;
+    this.getSugestions();
+    console.log("the course name was " + this.service.courseContentTreeModel.course_name);
+
+    this.service.courseContentTreeModel.course_id = Date.now().toString();
+    if (this.service.courseContentTreeModel.course_name != "" && this.service.courseContentTreeModel.course_name != undefined) {
+      console.log("The code reached inside the bloc");
+      this.courseName = this.service.courseContentTreeModel.course_name;
+    }
+
+    else {
+      this.courseName = "New Course"
+    }
+
+    this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filterGroup(value))
+      );
     // throw new Error('Method not implemented.');
   }
 
@@ -155,11 +201,11 @@ export class CourseAddComponentComponent implements OnInit {
       : new TodoItemFlatNode();
     flatNode.item = node.item;
     flatNode.level = level;
-    if(level<3){
+    if (level < 3) {
       flatNode.expandable = true;
     }
 
-    else{
+    else {
       flatNode.expandable = false;
     }
     // edit this to true to make it always expandable
@@ -193,25 +239,101 @@ export class CourseAddComponentComponent implements OnInit {
 
   /** Select the category so we can insert the new item. */
   addNewItem(node: TodoItemFlatNode) {
-    const parentNode = this.flatNodeMap.get(node);
+    var parentNode = this.flatNodeMap.get(node);
     this._database.insertItem(parentNode!, '');
     this.treeControl.expand(node);
-    console.log("add new item was clicked");
   }
 
   /** Save the node to database */
   saveNode(node: TodoItemFlatNode, itemValue: string) {
     const nestedNode = this.flatNodeMap.get(node);
-    this._database.updateItem(nestedNode!, itemValue);
-  }
 
-  /** Save the node to database */
-  saveNodeBranch(node: TodoItemFlatNode, itemValue: string) {
-    const nestedNode = this.flatNodeMap.get(node);
+    if (this.getLevel(node) == 1) {
+      nestedNode!.content_type = "chapter"
+    }
+
+    else if (this.getLevel(node) == 2) {
+      nestedNode!.content_type = "sub-chapter"
+    }
+
+    else if (this.getLevel(node) == 3) {
+      nestedNode!.content_type = "content"
+    }
+
+    this.service.courseContentTreeModel.children = this._database.data[0].children as any;
+
+    var data_string = JSON.stringify(this.service.courseContentTreeModel);
+
+
+    console.log("data got from json was called" + data_string);
+
     this._database.updateItem(nestedNode!, itemValue);
   }
 
   addCourseContent() {
     this.router.navigateByUrl("add_course_content");
+  }
+
+  getSugestions() {
+    this.service.getSuggestions().subscribe((res) => {
+      this.service.courseCategoryModel = res as CourseCategoryModel;
+    });
+  }
+
+  onSubmit() {
+    this.service.courseContentTreeModel.category_id = this.findCategory(this.category).category_id;
+    this.service.courseContentTreeModel.category_name = this.findCategory(this.category).category_name;
+    this.service.courseContentTreeModel.course_short_info = this.short_info;
+    this.service.courseContentTreeModel.course_long_description = this.long_info;
+    this.service.courseContentTreeModel.course_name = this.courseName;
+
+    this.service.submitData(this.service.courseContentTreeModel).subscribe(
+      data => console.log("Success", data),
+      error => console.error("Error", error));
+
+    console.log("the data on submit as seen was " + JSON.stringify(this.service.courseContentTreeModel))
+  }
+
+  findCategory(catgeories: string): ({
+    category_name: string;
+    category_id: string;
+  }) {
+    var category_name_selected: string;
+    var category_id_selected: string = "";
+
+    this.service.courseCategoryModel.state_group.forEach(element => {
+      element.category.forEach(catgeoryType => {
+        if (catgeoryType.category_name == catgeories) {
+          category_id_selected = catgeoryType.category_id;
+          category_name_selected = catgeoryType.category_name;
+          console.log("found the category");
+        }
+      });
+    });
+
+    if (category_id_selected != undefined && category_id_selected != "") {
+      return { category_name: catgeories, category_id: category_id_selected };
+    }
+
+    else {
+      return { category_name: catgeories, category_id: Date.now().toString() };
+    }
+
+  }
+
+  private _filterGroup(value: string): ({
+    letter: string;
+    category: {
+      category_name: string;
+      category_id: string;
+    }[]
+  }[]) {
+    if (value) {
+      return this.service.courseCategoryModel.state_group
+        .map(group => ({ letter: group.letter, category: _filter(group.category, value) }))
+        .filter(group => group.category.length > 0);
+    }
+
+    return this.service.courseCategoryModel.state_group;
   }
 }

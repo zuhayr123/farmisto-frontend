@@ -1,0 +1,122 @@
+{
+    "state_group": [{
+            "letter": "A",
+            "category": [{
+                    "category_name": "Aabba",
+                    "category_id": "1"
+                },
+
+                {
+                    "category_name": "Alalsjs",
+                    "category_id": "2"
+                },
+
+                {
+                    "category_name": "Alsksd",
+                    "category_id": "3"
+                },
+
+                {
+                    "category_name": "Alsjshd",
+                    "category_id": "4"
+                }
+            ]
+        },
+
+        {
+            "letter": "B",
+            "category": [{
+                    "category_name": "Babba",
+                    "category_id": "5"
+                },
+
+                {
+                    "category_name": "Blalsjs",
+                    "category_id": "6"
+                },
+
+                {
+                    "category_name": "Blsksd",
+                    "category_id": "7"
+                },
+
+                {
+                    "category_name": "Blsjshd",
+                    "category_id": "8"
+                }
+            ]
+        },
+
+        {
+            "letter": "C",
+            "category": [{
+                    "category_name": "Cabba",
+                    "category_id": "9"
+                },
+
+                {
+                    "category_name": "Clalsjs",
+                    "category_id": "10"
+                },
+
+                {
+                    "category_name": "Clsksd",
+                    "category_id": "11"
+                },
+
+                {
+                    "category_name": "Clsjshd",
+                    "category_id": "12"
+                }
+            ]
+        },
+
+        {
+            "letter": "D",
+            "category": [{
+                    "category_name": "Dabba",
+                    "category_id": "13"
+                },
+
+                {
+                    "category_name": "Dlalsjs",
+                    "category_id": "14"
+                },
+
+                {
+                    "category_name": "Dlsksd",
+                    "category_id": "15"
+                },
+
+                {
+                    "category_name": "Dlsjshd",
+                    "category_id": "16"
+                }
+            ]
+        },
+
+        {
+            "letter": "E",
+            "category": [{
+                    "category_name": "Eabba",
+                    "category_id": "17"
+                },
+
+                {
+                    "category_name": "Elalsjs",
+                    "category_id": "18"
+                },
+
+                {
+                    "category_name": "Elsksd",
+                    "category_id": "19"
+                },
+
+                {
+                    "category_name": "Elsjshd",
+                    "category_id": "20"
+                }
+            ]
+        }
+    ]
+}

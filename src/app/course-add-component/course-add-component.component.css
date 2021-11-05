@@ -10,6 +10,25 @@
     font-size: large;
 }
 
+.field_in_focus {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 12px;
+    color: #004d40 !important;
+    background: #b2dfdb;
+    padding-left: 0.5em;
+}
+
+.field_not_in_focus {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 12px;
+    background: #eee;
+    padding-left: 0.5em;
+}
+
 .description {
     padding-top: 0.8em;
     padding-left: 3.5em;

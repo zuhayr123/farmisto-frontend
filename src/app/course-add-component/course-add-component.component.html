@@ -15,31 +15,46 @@
     </div>
 
     <div class="align_content">
-        <div style="display: inline-flex; flex-direction: row; align-items: center; border-radius: 12px; background: #eee; padding-left: 0.5em;">
-            <div class="title" style="font-size: 28px;">
+        <div [ngClass]="hide ? 'field_in_focus' : 'field_not_in_focus'">
+
+            <div style="font-size: 28px;" [attr.contenteditable]="hide" class="title">
                 {{courseName}}
             </div>
 
-            <button mat-icon-button aria-label="Example icon button with a home icon">
-                <mat-icon style="font-size: 28px;">edit</mat-icon>
+            <button mat-icon-button matSuffix (click)="hide = !hide">
+                <mat-icon>{{hide ? 'save' : 'edit'}}</mat-icon>
             </button>
 
         </div>
 
         <div style="color: dimgray; padding-left: 0.5em; font-size: 12px; padding-top: 4px;">
-            * This name will appear to farmers as course name
+            * This name will appear to farmers as course name {{category}}
         </div>
+
+        <form [formGroup]="stateForm">
+            <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
+                <mat-label>Course Category</mat-label>
+                <input type="text" [(ngModel)]="category" matInput formControlName="stateGroup" required [matAutocomplete]="autoGroup">
+                <mat-autocomplete #autoGroup="matAutocomplete">
+                    <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter">
+                        <mat-option *ngFor="let name of group.category" [value]="name.category_name">
+                            {{name.category_name}}
+                        </mat-option>
+                    </mat-optgroup>
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
 
         <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
             <mat-label>A short description about the course</mat-label>
-            <input matInput maxlength="400" placeholder="Crop" #input>
+            <input type="text" [(ngModel)]="short_info" matInput maxlength="400" #input placeholder="Crop">
             <mat-hint align="end">{{input.value.length}} / 400</mat-hint>
             <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"></textarea>
         </mat-form-field>
 
         <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
             <mat-label>The complete description of the course</mat-label>
-            <input matInput maxlength="400" placeholder="Crop" #input>
+            <input type="text" [(ngModel)]="long_info" matInput maxlength="400" #input placeholder="Crop">
             <mat-hint align="end">{{input.value.length}} / 800</mat-hint>
             <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="10" cdkAutosizeMaxRows="15"></textarea>
         </mat-form-field>
@@ -81,6 +96,18 @@
                 </button>
             </mat-tree-node>
         </mat-tree>
+
+        <div style="display: flex; flex-direction: row;">
+
+            <div style="width: 70%; display: flex; align-items: flex-end; justify-content: right;">
+                <button mat-raised-button color="primary" style="height: 2.8em !important;" (click)="onSubmit();">
+                    <mat-icon>grading</mat-icon>
+                    Review
+                </button>
+            </div>
+        </div>
+
+        <div style="height: 2em; width: 100%;"></div>
 
     </div>
 

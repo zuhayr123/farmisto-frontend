@@ -1,0 +1,50 @@
+{
+    "course_id": "1636123072502",
+    "category_id": "4",
+    "category_name": "Alsjshd",
+    "course_short_info": "This is the short description",
+    "course_long_description": "This is the long description",
+    "children": [{
+            "item": "Chapter 01",
+            "content_id": "1636123110756",
+            "content_type": "chapter",
+            "children": [{
+                    "item": "Sub Chapter 01",
+                    "content_id": "1636123126552",
+                    "content_type": "sub-chapter",
+                    "children": [{
+                            "item": "Content 01",
+                            "content_id": "1636123152082",
+                            "content_type": "content"
+                        },
+                        {
+                            "item": "Content 02",
+                            "content_id": "1636123158933",
+                            "content_type": "content"
+                        }
+                    ]
+                },
+                {
+                    "item": "Sub Chapter 02",
+                    "content_id": "1636123135346",
+                    "content_type": "sub-chapter"
+                },
+                {
+                    "item": "Sub Chapter 03",
+                    "content_id": "1636123142101",
+                    "content_type": "sub-chapter"
+                }
+            ]
+        },
+        {
+            "item": "Chapter 02",
+            "content_id": "1636123116899",
+            "content_type": "chapter"
+        },
+        {
+            "item": "Chapter 03",
+            "content_id": "1636123121419",
+            "content_type": "chapter"
+        }
+    ]
+}
