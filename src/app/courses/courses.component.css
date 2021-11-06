@@ -26,6 +26,7 @@ table {
 }
 
 tr.example-element-row:not(.example-expanded-row):hover {
+    cursor: pointer;
     background: rgba(225, 227, 228, 0.5);
 }
 

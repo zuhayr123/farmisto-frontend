@@ -167,6 +167,10 @@ export class CourseAddComponentComponent implements OnInit {
     if (this.service.courseContentTreeModel.course_name != "" && this.service.courseContentTreeModel.course_name != undefined) {
       console.log("The code reached inside the bloc");
       this.courseName = this.service.courseContentTreeModel.course_name;
+      this.short_info = this.service.courseContentTreeModel.course_short_info;
+      this.long_info = this.service.courseContentTreeModel.course_long_description;
+      this._database.data[0].children = this.service.courseContentTreeModel.children as any
+      this._database.dataChange.next(this._database.data);
     }
 
     else {

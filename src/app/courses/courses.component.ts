@@ -3,9 +3,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { PopulateCoursesService } from '../services/populate-courses.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DialogContentAdditionComponent } from '../dialog-content-addition/dialog-content-addition.component';
 import { CourseContentTreeModel } from '../map-models/course_content_tree';
+import { CreateCourseService } from '../create-course.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class CoursesComponent implements AfterViewInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor(public dialog: MatDialog, public service: PopulateCoursesService) {
+  constructor(public dialog: MatDialog, public service: CreateCourseService, private router: Router, private route: ActivatedRoute) {
     this.getCourseList();
   }
 
@@ -53,10 +54,16 @@ export class CoursesComponent implements AfterViewInit {
   getCourseList() {
     this.service.getCourseList().subscribe((res) => {
       console.log("the resoponse received was " + JSON.stringify(res))
-      this.service.courseContentTreeModels = (res as {data : CourseContentTreeModel[]}).data
+      this.service.courseContentTreeModels = (res as { data: CourseContentTreeModel[] }).data
       this.dataSource = new MatTableDataSource(this.service.courseContentTreeModels);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    })
+    });
+  }
+
+  showCourseDetails(row:any) {
+    console.log("the data visible in the course component while navigation is " + JSON.stringify(row));
+    this.service.courseContentTreeModel = row as CourseContentTreeModel;
+    this.router.navigateByUrl("add_course");
   }
 }
