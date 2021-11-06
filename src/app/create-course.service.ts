@@ -14,10 +14,12 @@ export class CreateCourseService {
 
   base_url = "https://farmisto-learn.herokuapp.com/api"
   _url_submit_content_list = this.base_url + '/course/course_info';
+  _url_get_course_list = this.base_url + '/course/all_courses';
   courseName: string = ""
 
-
   constructor(private _http: HttpClient) { }
+
+  courseContentTreeModels!: CourseContentTreeModel[];
 
   courseContentTreeModel: CourseContentTreeModel = new CourseContentTreeModel();
 
@@ -29,5 +31,10 @@ export class CreateCourseService {
 
   submitData(data: CourseContentTreeModel) {
     return this._http.post<any>(this._url_submit_content_list, data);
+  }
+
+  getCourseList() {
+    console.log("course list was called");
+    return this._http.get(this._url_get_course_list);
   }
 }

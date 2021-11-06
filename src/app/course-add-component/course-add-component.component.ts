@@ -167,6 +167,10 @@ export class CourseAddComponentComponent implements OnInit {
     if (this.service.courseContentTreeModel.course_name != "" && this.service.courseContentTreeModel.course_name != undefined) {
       console.log("The code reached inside the bloc");
       this.courseName = this.service.courseContentTreeModel.course_name;
+      this.short_info = this.service.courseContentTreeModel.course_short_info;
+      this.long_info = this.service.courseContentTreeModel.course_long_description;
+      this._database.data[0].children = this.service.courseContentTreeModel.children as any
+      this._database.dataChange.next(this._database.data);
     }
 
     else {
@@ -179,6 +183,11 @@ export class CourseAddComponentComponent implements OnInit {
         map(value => this._filterGroup(value))
       );
     // throw new Error('Method not implemented.');
+  }
+
+  updateCourseName(event: Event){
+    this.service.courseContentTreeModel.course_name = (event.target as HTMLElement).innerText;
+    console.log("the course name as changed on button click was " + this.service.courseContentTreeModel.course_name)
   }
 
   getLevel = (node: TodoItemFlatNode) => node.level;
@@ -285,7 +294,6 @@ export class CourseAddComponentComponent implements OnInit {
     this.service.courseContentTreeModel.category_name = this.findCategory(this.category).category_name;
     this.service.courseContentTreeModel.course_short_info = this.short_info;
     this.service.courseContentTreeModel.course_long_description = this.long_info;
-    this.service.courseContentTreeModel.course_name = this.courseName;
 
     this.service.submitData(this.service.courseContentTreeModel).subscribe(
       data => console.log("Success", data),

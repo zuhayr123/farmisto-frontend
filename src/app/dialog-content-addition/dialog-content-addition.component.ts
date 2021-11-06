@@ -9,17 +9,17 @@ import { CreateCourseService } from '../create-course.service';
 })
 export class DialogContentAdditionComponent implements OnInit {
 
-  public courseName: string = "null";
+  public courseName!: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, public service : CreateCourseService) { }
+  constructor(private router: Router, private route: ActivatedRoute, public service: CreateCourseService) { }
 
   ngOnInit(): void {
   }
 
-  addCourse(){
+  addCourse() {
     console.log(this.courseName)
-    this.service.courseName = this.courseName
-    this.router.navigate(['add_course'], {relativeTo:this.route});
+    this.service.courseContentTreeModel.course_name = this.courseName
+    this.router.navigate(['add_course'], { relativeTo: this.route });
   }
 
 }

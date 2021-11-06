@@ -41,6 +41,7 @@ import { AddContentInfoComponent } from './add-content-info/add-content-info.com
 import { ChildVideoContentInfoComponent } from './child-video-content-info/child-video-content-info.component';
 import { ChildTextInfoComponent } from './child-text-info/child-text-info.component'
 import { CreateCourseService } from './create-course.service';
+import { PopulateCoursesService } from './services/populate-courses.service';
 
 
 @NgModule({
@@ -83,7 +84,7 @@ import { CreateCourseService } from './create-course.service';
     MatSelectModule,
     MatAutocompleteModule
   ],
-  providers: [CreateCourseService],
+  providers: [CreateCourseService, PopulateCoursesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
