@@ -168,6 +168,7 @@ export class CourseAddComponentComponent implements OnInit {
       this.courseName = this.service.courseContentTreeModel.course_name;
       this.short_info = this.service.courseContentTreeModel.course_short_info;
       this.long_info = this.service.courseContentTreeModel.course_long_description;
+      this.category = this.service.courseContentTreeModel.category_name;
       this._database.data[0].children = this.service.courseContentTreeModel.children as any
       this._database.dataChange.next(this._database.data);
     }
