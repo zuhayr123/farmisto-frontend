@@ -161,11 +161,10 @@ export class CourseAddComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSugestions();
-    console.log("the course name was " + this.service.courseContentTreeModel.course_name);
+    console.log("the data receievd on open was  " + this.service.courseContentTreeModel._id);
 
     this.service.courseContentTreeModel.course_id = Date.now().toString();
     if (this.service.courseContentTreeModel.course_name != "" && this.service.courseContentTreeModel.course_name != undefined) {
-      console.log("The code reached inside the bloc");
       this.courseName = this.service.courseContentTreeModel.course_name;
       this.short_info = this.service.courseContentTreeModel.course_short_info;
       this.long_info = this.service.courseContentTreeModel.course_long_description;
@@ -185,7 +184,7 @@ export class CourseAddComponentComponent implements OnInit {
     // throw new Error('Method not implemented.');
   }
 
-  updateCourseName(event: Event){
+  updateCourseName(event: Event) {
     this.service.courseContentTreeModel.course_name = (event.target as HTMLElement).innerText;
     console.log("the course name as changed on button click was " + this.service.courseContentTreeModel.course_name)
   }

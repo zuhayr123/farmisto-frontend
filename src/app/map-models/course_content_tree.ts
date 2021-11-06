@@ -1,4 +1,5 @@
 export class CourseContentTreeModel {
+    _id!:string
     course_id!: string;
     course_name!: string;
     course_short_info!: string;
