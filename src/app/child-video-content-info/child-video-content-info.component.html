@@ -1,12 +1,13 @@
 <div class="align_content" style="padding-top: 1em;">
 
-    <div style="display: inline-flex; flex-direction: row; align-items: center; border-radius: 12px; background: #eee; padding-left: 0.5em;">
-        <div class="title" style="font-size: 28px;">
-            Video Title
+    <div [ngClass]="hide ? 'field_in_focus' : 'field_not_in_focus'">
+
+        <div style="font-size: 28px;" [attr.contenteditable]="hide" class="title" (input)="updateContentName($event);">
+            {{title}}
         </div>
 
-        <button mat-icon-button aria-label="Example icon button with a home icon">
-            <mat-icon style="font-size: 28px;">edit</mat-icon>
+        <button mat-icon-button matSuffix (click)="hide = !hide">
+            <mat-icon>{{hide ? 'save' : 'edit'}}</mat-icon>
         </button>
 
     </div>
@@ -17,19 +18,19 @@
 
     <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
         <mat-label>Video URL</mat-label>
-        <input matInput maxlength="400" placeholder="https://www.youtube.com/watch?v=aFPJf-wKTd0" #input>
+        <input [(ngModel)]="url" matInput maxlength="400" placeholder="https://www.youtube.com/watch?v=aFPJf-wKTd0" #input>
     </mat-form-field>
 
     <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
         <mat-label>A short description about the course</mat-label>
-        <input matInput maxlength="400" placeholder="Crop" #input>
+        <input [(ngModel)]="short_info" matInput maxlength="400" placeholder="Crop" #input>
         <mat-hint align="end">{{input.value.length}} / 400</mat-hint>
         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"></textarea>
     </mat-form-field>
 
     <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
         <mat-label>The complete description of the course</mat-label>
-        <input matInput maxlength="400" placeholder="Crop" #input>
+        <input [(ngModel)]="long_info" matInput maxlength="400" placeholder="Crop" #input>
         <mat-hint align="end">{{input.value.length}} / 800</mat-hint>
         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="10" cdkAutosizeMaxRows="15"></textarea>
     </mat-form-field>

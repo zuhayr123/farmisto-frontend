@@ -31,6 +31,7 @@ export class TodoItemFlatNode {
   level!: number;
   expandable!: boolean;
   hasChild!: boolean;
+  content_id!: string;
 }
 
 /**
@@ -209,6 +210,7 @@ export class CourseAddComponentComponent implements OnInit {
       ? existingNode
       : new TodoItemFlatNode();
     flatNode.item = node.item;
+    flatNode.content_id = node.content_id
     flatNode.level = level;
     if (level < 3) {
       flatNode.expandable = true;
@@ -279,8 +281,9 @@ export class CourseAddComponentComponent implements OnInit {
     this._database.updateItem(nestedNode!, itemValue);
   }
 
-  addCourseContent() {
-    this.router.navigateByUrl("add_course_content");
+  addCourseContent(content_id : string, content_name:string) {
+    console.log("data as seen by the course content was " + content_id)
+    this.router.navigateByUrl("add_course_content", {state: {data: {content_name : content_name, content_id :content_id}}});
   }
 
   getSugestions() {
