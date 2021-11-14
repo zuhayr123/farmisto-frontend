@@ -36,13 +36,14 @@ export class ChildVideoContentInfoComponent implements OnInit {
 
 
   onsubmit(){
+    console.log("the submit button as clicked");
     this.service.addVideoContent.short_info = this.short_info;
     this.service.addVideoContent.long_info = this.long_info;
     this.service.addVideoContent.url = this.url;
     this.service.addVideoContent.content_type = "video";
 
     this.service.submitData(this.service.addVideoContent).subscribe((res) => {
-      
+      console.log("the response we received was " + res);
     });
   }
 
