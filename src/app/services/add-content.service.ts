@@ -14,6 +14,7 @@ export class AddContentService {
   base_url = "https://farmisto-learn.herokuapp.com/api"
   _url_submit_content = this.base_url + '/content/content_info';
   _url_update_parent = this.base_url + '/course/update_course_info_by_id';
+  _url_get_content_data = this.base_url + '/course/update_content_info_by_id';
 
   constructor(private _http: HttpClient) { }
 
@@ -26,6 +27,12 @@ export class AddContentService {
   updateContentData(data: CourseContentTreeModel) {
     const params = new HttpParams().append('course_id', data.course_id);
     return this._http.put<any>(this._url_update_parent, data, {params})
+  }
+
+  getContentInfo(content_id : string) {
+    console.log("course list was called");
+    const params = new HttpParams().append('content_id', content_id);
+    return this._http.get(this._url_get_content_data, {params});
   }
 
 }

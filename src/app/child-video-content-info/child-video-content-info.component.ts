@@ -1,4 +1,5 @@
 import { Component, Injectable, OnInit } from '@angular/core';
+import { AddVideoContent } from '../map-models/add-video-content';
 import { CourseCategoryModel } from '../map-models/course_category_model';
 import { CourseContentTreeModel } from '../map-models/course_content_tree';
 import { AddContentService } from '../services/add-content.service';
@@ -32,9 +33,21 @@ export class ChildVideoContentInfoComponent implements OnInit {
       this.title = history.state.data.content_name;
       this.contentId = history.state.data.content_id;
       this.contentModel = history.state.data.treeData
-
+      console.log("the content id was " + this.contentId);
       console.log("the tree data is " + JSON.stringify(this.contentModel))
     }
+
+
+
+    this.service.getContentInfo(this.contentId).subscribe((res) => {
+      console.log("the code reached here");
+      var data = ((res as any).content_info as AddVideoContent);
+      console.log("data we recievd was " + JSON.stringify(data))
+      this.title = data.title;
+      this.short_info = data.short_info;
+      this.long_info = data.long_info;
+      this.url = data.url;
+    });
   }
 
   updateContentName(event: Event) {
@@ -68,13 +81,14 @@ export class ChildVideoContentInfoComponent implements OnInit {
     this.service.addVideoContent.long_info = this.long_info;
     this.service.addVideoContent.url = this.url;
     this.service.addVideoContent.content_type = "video";
+    this.service.addVideoContent.content_id = this.contentId;
 
     this.service.submitData(this.service.addVideoContent).subscribe((res) => {
       this.contentModel = this.searchAndUpdateTree(this.contentId, this.contentModel);
       console.log("Data should be able to visible here.")
       console.log(JSON.stringify(this.contentModel));
       this.service.updateContentData(this.contentModel).subscribe((result) => {
-        console.log("the result seen was " +  JSON.stringify(result))
+        console.log("the result seen was " +  JSON.stringify(result));
       });
       console.log("the response we received was " + res);
     });
