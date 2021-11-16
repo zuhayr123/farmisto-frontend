@@ -23,6 +23,7 @@ export class TodoItemNode {
   item!: string;
   content_type!: string;
   content_id!: string;
+  has_content!: boolean;
 }
 
 /** Flat to-do item node with expandable and level information */
@@ -163,8 +164,6 @@ export class CourseAddComponentComponent implements OnInit {
   ngOnInit(): void {
     this.getSugestions();
     console.log("the data receievd on open was  " + this.service.courseContentTreeModel._id);
-
-    this.service.courseContentTreeModel.course_id = Date.now().toString();
     if (this.service.courseContentTreeModel.course_name != "" && this.service.courseContentTreeModel.course_name != undefined) {
       this.courseName = this.service.courseContentTreeModel.course_name;
       this.short_info = this.service.courseContentTreeModel.course_short_info;
@@ -176,6 +175,7 @@ export class CourseAddComponentComponent implements OnInit {
 
     else {
       this.courseName = "New Course"
+      this.service.courseContentTreeModel.course_id = Date.now().toString();
     }
 
     this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges
@@ -271,6 +271,8 @@ export class CourseAddComponentComponent implements OnInit {
       nestedNode!.content_type = "content"
     }
 
+    nestedNode!.has_content = false;
+
     this.service.courseContentTreeModel.children = this._database.data[0].children as any;
 
     var data_string = JSON.stringify(this.service.courseContentTreeModel);
@@ -281,9 +283,9 @@ export class CourseAddComponentComponent implements OnInit {
     this._database.updateItem(nestedNode!, itemValue);
   }
 
-  addCourseContent(content_id : string, content_name:string) {
+  addCourseContent(content_id: string, content_name: string) {
     console.log("data as seen by the course content was " + content_id)
-    this.router.navigateByUrl("add_course_content", {state: {data: {content_name : content_name, content_id :content_id}}});
+    this.router.navigateByUrl("add_course_content", { state: { data: { content_name: content_name, content_id: content_id, treeData : this.service.courseContentTreeModel } } });
   }
 
   getSugestions() {
