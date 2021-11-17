@@ -1,0 +1,40 @@
+.title {
+    padding-top: 1.5em;
+    padding-left: 1.5em;
+    font-weight: bold;
+    font-size: large;
+}
+
+.description {
+    padding-top: 0.8em;
+    padding-left: 1.7em;
+    color: dimgray;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 30%;
+}
+
+.mat-header-cell {
+    height: 6em !important;
+    background: rgba(224, 224, 224, 1);
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+    cursor: pointer;
+    background: rgba(225, 227, 228, 0.5);
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+    background: rgba(225, 227, 228, 0.5);
+}
+
+td,
+th {
+    width: 25%;
+}

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { singles } from './dumy_data';
-import { multi } from './dumy_data';
+import { multi } from './dummy_user_available';
+import { bar_dummy } from './bar_char_dummy_data';
 @Component({
   selector: 'app-analytics',
   templateUrl: './analytics.component.html',
@@ -15,6 +16,8 @@ export class AnalyticsComponent implements OnInit {
   multi!: any[];
   view_line_graph: [number, number] = [700, 300];
 
+  bar_dummy!: any[];
+
   // options
   showLegend: boolean = true;
   showLabels: boolean = true;
@@ -25,9 +28,12 @@ export class AnalyticsComponent implements OnInit {
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Year';
-  yAxisLabel: string = 'Population';
+  xAxisLabel: string = 'Day';
+  yAxisLabel: string = 'Users';
   timeline: boolean = true;
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
 
   colorScheme = {
     name: 'night',
@@ -55,11 +61,12 @@ export class AnalyticsComponent implements OnInit {
   constructor() {
     Object.assign(this, { singles });
     Object.assign(this, { multi });
+    Object.assign(this, {bar_dummy});
   }
 
   ngOnInit(): void {
     this.view = [window.innerWidth / 1.35, 400];
-    this.view_line_graph = [window.innerWidth, 400];
+    this.view_line_graph = [window.innerWidth / 1.2, 400];
   }
 
   onSelect(event: any) {
@@ -68,7 +75,7 @@ export class AnalyticsComponent implements OnInit {
 
   onResize(event: any) {
     this.view = [event.target.innerWidth / 1.35, 400];
-    this.view_line_graph = [event.target.innerWidth, 400];
+    this.view_line_graph = [event.target.innerWidth/ 1.2, 400];
   }
 
 }
