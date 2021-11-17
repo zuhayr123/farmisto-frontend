@@ -1,4 +1,4 @@
-<div style="width: 98%; height: 98%; background-color: white; margin: 1%; border-radius: 20px;">
+<div style="width: 98%; min-height: 98%; background-color: white; margin: 1%; border-radius: 20px;">
 
     <div class="title">
         Analytics Screen
@@ -8,11 +8,51 @@
         Get to know everything about users from quick analytics to support query resolution and more!
     </div>
 
-    <ngx-charts-area-chart-stacked [view]="view" [scheme]="colorScheme" [legend]="legend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [timeline]="timeline"
-        [results]="multi" (select)="onSelect($event)">
-    </ngx-charts-area-chart-stacked>
+    <div class="title" style="font-size: medium; margin-left: 1em; margin-top: 1em;">
+        Daily Active Users
+    </div>
 
-    <ngx-charts-pie-grid style="width: 100%;" [view]="view" [scheme]="colorScheme" [results]="singles" (select)="onSelect($event)" (window:resize)="onResize($event)">
-    </ngx-charts-pie-grid>
+    <div class="description" style="margin-left: 0.8em; margin-bottom: 1em;">
+        This is shows the number of active and inactive users on the application. Active user means a user who is interacting with the application.
+    </div>
+
+    <div style="min-height: 400px;">
+        <ngx-charts-area-chart-stacked [view]="view_line_graph" [scheme]="colorScheme" [legend]="legend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [timeline]="timeline"
+            [results]="multi" (select)="onSelect($event)">
+        </ngx-charts-area-chart-stacked>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="title" style="font-size: medium; margin-left: 1em; margin-top: 1em;">
+        Best Performing Courses
+    </div>
+
+    <div class="description" style="margin-left: 0.8em; margin-bottom: 1em;">
+        This shows the top three performing courses, performace in measured in terms of enrollment and bounce rate.
+    </div>
+
+
+    <div style="min-height: 400px;">
+        <ngx-charts-pie-grid style="width: 100%;" [view]="view" [scheme]="colorScheme" [results]="singles" (select)="onSelect($event)" (window:resize)="onResize($event)">
+        </ngx-charts-pie-grid>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="title" style="font-size: medium; margin-left: 1em; margin-top: 1em;">
+        Total Watch Time
+    </div>
+
+    <div class="description" style="margin-left: 0.8em; margin-bottom: 1em;">
+        This shows the total watch time every day
+    </div>
+
+
+    <div style="min-height: 400px;">
+        <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="bar_dummy" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
+    </div>
 
 </div>

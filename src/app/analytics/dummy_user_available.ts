@@ -1,69 +1,77 @@
 export var multi = [
     {
-      "name": "Germany",
-      "series": [
-        {
-          "name": "1990",
-          "value": 62000000
-        },
-        {
-          "name": "2010",
-          "value": 73000000
-        },
-        {
-          "name": "2011",
-          "value": 89400000
-        }
-      ]
+        "name": "Inactive",
+        "series": [
+            {
+                "name": "Sunday",
+                "value": 22000000
+            },
+
+            {
+                "name": "Monday",
+                "value": 32000000
+            },
+
+            {
+                "name": "Tuesday",
+                "value": 12000000
+            },
+
+            {
+                "name": "Wednesday",
+                "value": 52000000
+            },
+            {
+                "name": "Thursday",
+                "value": 23000000
+            },
+            {
+                "name": "Friday",
+                "value": 29400000
+            },
+
+            {
+                "name": "Saturday",
+                "value": 22000000
+            }
+        ]
     },
-  
+
     {
-      "name": "USA",
-      "series": [
-        {
-          "name": "1990",
-          "value": 250000000
-        },
-        {
-          "name": "2010",
-          "value": 309000000
-        },
-        {
-          "name": "2011",
-          "value": 311000000
-        }
-      ]
-    },
-  
-    {
-      "name": "France",
-      "series": [
-        {
-          "name": "1990",
-          "value": 58000000
-        },
-        {
-          "name": "2010",
-          "value": 50000020
-        },
-        {
-          "name": "2011",
-          "value": 58000000
-        }
-      ]
-    },
-    {
-      "name": "UK",
-      "series": [
-        {
-          "name": "1990",
-          "value": 57000000
-        },
-        {
-          "name": "2010",
-          "value": 62000000
-        }
-      ]
+        "name": "Active",
+        "series": [
+            {
+                "name": "Sunday",
+                "value": 32000000
+            },
+
+            {
+                "name": "Monday",
+                "value": 54000000
+            },
+
+            {
+                "name": "Tuesday",
+                "value": 42000000
+            },
+
+            {
+                "name": "Wednesday",
+                "value": 63000000
+            },
+            {
+                "name": "Thursday",
+                "value": 23000000
+            },
+            {
+                "name": "Friday",
+                "value": 49400000
+            },
+
+            {
+                "name": "Saturday",
+                "value": 32000000
+            }
+        ]
     }
-  ];
-  
+];

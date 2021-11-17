@@ -31,6 +31,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+
 
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -84,7 +87,9 @@ import { PopulateCoursesService } from './services/populate-courses.service';
     NgxDropzoneModule,
     MatSelectModule,
     MatAutocompleteModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MatCardModule,
+    MatDividerModule
   ],
   providers: [CreateCourseService, PopulateCoursesService],
   bootstrap: [AppComponent]
