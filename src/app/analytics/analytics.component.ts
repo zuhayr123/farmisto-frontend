@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { singles } from './dumy_data';
-
+import { multi } from './dumy_data';
 @Component({
   selector: 'app-analytics',
   templateUrl: './analytics.component.html',
@@ -12,9 +12,22 @@ export class AnalyticsComponent implements OnInit {
   singles!: any[];
   view: [number, number] = [1000, 500];
 
+  multi!: any[];
+  view_line_graph: [number, number] = [700, 300];
+
   // options
   showLegend: boolean = true;
   showLabels: boolean = true;
+
+  legend: boolean = true;
+  animations: boolean = true;
+  xAxis: boolean = true;
+  yAxis: boolean = true;
+  showYAxisLabel: boolean = true;
+  showXAxisLabel: boolean = true;
+  xAxisLabel: string = 'Year';
+  yAxisLabel: string = 'Population';
+  timeline: boolean = true;
 
   colorScheme = {
     name: 'night',
@@ -41,9 +54,12 @@ export class AnalyticsComponent implements OnInit {
 
   constructor() {
     Object.assign(this, { singles });
+    Object.assign(this, { multi });
   }
 
   ngOnInit(): void {
+    this.view = [window.innerWidth / 1.35, 400];
+    this.view_line_graph = [window.innerWidth, 400];
   }
 
   onSelect(event: any) {
@@ -52,6 +68,7 @@ export class AnalyticsComponent implements OnInit {
 
   onResize(event: any) {
     this.view = [event.target.innerWidth / 1.35, 400];
+    this.view_line_graph = [event.target.innerWidth, 400];
   }
 
 }
