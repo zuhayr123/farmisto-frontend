@@ -75,7 +75,7 @@ export class AnalyticsComponent implements OnInit {
 
   onResize(event: any) {
     this.view = [event.target.innerWidth / 1.35, 400];
-    this.view_line_graph = [event.target.innerWidth, 400];
+    this.view_line_graph = [event.target.innerWidth/ 1.2, 400];
   }
 
 }
