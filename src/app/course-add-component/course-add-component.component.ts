@@ -23,6 +23,7 @@ export class TodoItemNode {
   item!: string;
   content_type!: string;
   content_id!: string;
+  has_content!: boolean;
 }
 
 /** Flat to-do item node with expandable and level information */
@@ -31,6 +32,7 @@ export class TodoItemFlatNode {
   level!: number;
   expandable!: boolean;
   hasChild!: boolean;
+  content_id!: string;
 }
 
 /**
@@ -161,20 +163,19 @@ export class CourseAddComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSugestions();
-    console.log("the course name was " + this.service.courseContentTreeModel.course_name);
-
-    this.service.courseContentTreeModel.course_id = Date.now().toString();
+    console.log("the data receievd on open was  " + this.service.courseContentTreeModel._id);
     if (this.service.courseContentTreeModel.course_name != "" && this.service.courseContentTreeModel.course_name != undefined) {
-      console.log("The code reached inside the bloc");
       this.courseName = this.service.courseContentTreeModel.course_name;
       this.short_info = this.service.courseContentTreeModel.course_short_info;
       this.long_info = this.service.courseContentTreeModel.course_long_description;
+      this.category = this.service.courseContentTreeModel.category_name;
       this._database.data[0].children = this.service.courseContentTreeModel.children as any
       this._database.dataChange.next(this._database.data);
     }
 
     else {
       this.courseName = "New Course"
+      this.service.courseContentTreeModel.course_id = Date.now().toString();
     }
 
     this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges
@@ -185,7 +186,7 @@ export class CourseAddComponentComponent implements OnInit {
     // throw new Error('Method not implemented.');
   }
 
-  updateCourseName(event: Event){
+  updateCourseName(event: Event) {
     this.service.courseContentTreeModel.course_name = (event.target as HTMLElement).innerText;
     console.log("the course name as changed on button click was " + this.service.courseContentTreeModel.course_name)
   }
@@ -209,6 +210,7 @@ export class CourseAddComponentComponent implements OnInit {
       ? existingNode
       : new TodoItemFlatNode();
     flatNode.item = node.item;
+    flatNode.content_id = node.content_id
     flatNode.level = level;
     if (level < 3) {
       flatNode.expandable = true;
@@ -269,6 +271,8 @@ export class CourseAddComponentComponent implements OnInit {
       nestedNode!.content_type = "content"
     }
 
+    nestedNode!.has_content = false;
+
     this.service.courseContentTreeModel.children = this._database.data[0].children as any;
 
     var data_string = JSON.stringify(this.service.courseContentTreeModel);
@@ -279,8 +283,9 @@ export class CourseAddComponentComponent implements OnInit {
     this._database.updateItem(nestedNode!, itemValue);
   }
 
-  addCourseContent() {
-    this.router.navigateByUrl("add_course_content");
+  addCourseContent(content_id: string, content_name: string) {
+    console.log("data as seen by the course content was " + content_id)
+    this.router.navigateByUrl("add_course_content", { state: { data: { content_name: content_name, content_id: content_id, treeData : this.service.courseContentTreeModel } } });
   }
 
   getSugestions() {

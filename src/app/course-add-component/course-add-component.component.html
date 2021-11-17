@@ -72,7 +72,7 @@
                 <button mat-icon-button class="checklist-leaf-node">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-flat-button (click)="addCourseContent();">{{node.item}}</button>
+                <button mat-flat-button (click)="addCourseContent(node.content_id, node.item);">{{node.item}}</button>
             </mat-tree-node>
 
             <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
@@ -90,7 +90,7 @@
                     </mat-icon>
                 </button>
 
-                <button mat-flat-button (click)="addCourseContent();">{{node.item}}</button>
+                <button mat-flat-button [disabled]="true" style="background: transparent;" (click)="addCourseContent(node.content_id, node.item);">{{node.item}}</button>
                 <button mat-icon-button (click)="addNewItem(node)">
                     <mat-icon>add</mat-icon>
                 </button>

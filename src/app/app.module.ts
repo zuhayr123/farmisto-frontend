@@ -33,6 +33,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 import { DialogContentAdditionComponent } from './dialog-content-addition/dialog-content-addition.component';
@@ -82,7 +83,8 @@ import { PopulateCoursesService } from './services/populate-courses.service';
     MatButtonToggleModule,
     NgxDropzoneModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    NgxChartsModule
   ],
   providers: [CreateCourseService, PopulateCoursesService],
   bootstrap: [AppComponent]

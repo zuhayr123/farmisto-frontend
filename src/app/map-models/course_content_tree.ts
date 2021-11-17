@@ -1,4 +1,5 @@
 export class CourseContentTreeModel {
+    _id!:string
     course_id!: string;
     course_name!: string;
     course_short_info!: string;
@@ -8,18 +9,22 @@ export class CourseContentTreeModel {
     item!: string;
     content_type!: string;
     content_id!: string;
+    has_content!:boolean;
     children!: [{
         item: string;
         content_type: string;
         content_id: string;
+        has_content:boolean;
         children: [{
             item: string;
             content_type: string;
             content_id: string;
+            has_content:boolean;
             children: [{
                 item: string;
                 content_type: string;
                 content_id: string;
+                has_content:boolean;
             }]
         }]
     }]

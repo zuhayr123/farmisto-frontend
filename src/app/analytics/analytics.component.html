@@ -1,1 +1,18 @@
-<p>analytics works!</p>
+<div style="width: 98%; height: 98%; background-color: white; margin: 1%; border-radius: 20px;">
+
+    <div class="title">
+        Analytics Screen
+    </div>
+
+    <div class="description">
+        Get to know everything about users from quick analytics to support query resolution and more!
+    </div>
+
+    <ngx-charts-area-chart-stacked [view]="view" [scheme]="colorScheme" [legend]="legend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [timeline]="timeline"
+        [results]="multi" (select)="onSelect($event)">
+    </ngx-charts-area-chart-stacked>
+
+    <ngx-charts-pie-grid style="width: 100%;" [view]="view" [scheme]="colorScheme" [results]="singles" (select)="onSelect($event)" (window:resize)="onResize($event)">
+    </ngx-charts-pie-grid>
+
+</div>
