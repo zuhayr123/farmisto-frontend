@@ -8,6 +8,7 @@ import { CourseAddComponentComponent } from './course-add-component/course-add-c
 import { AddContentInfoComponent } from './add-content-info/add-content-info.component';
 import { ChildVideoContentInfoComponent } from './child-video-content-info/child-video-content-info.component';
 import { ChildTextInfoComponent } from './child-text-info/child-text-info.component';
+import { UserInformationComponent } from './user-information/user-information.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   {path: 'courses',component: CoursesComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
       path:'text_content', component: ChildTextInfoComponent
     },
   ]},
+  { path: 'user-info', component: UserInformationComponent },
 ];
 
 @NgModule({
