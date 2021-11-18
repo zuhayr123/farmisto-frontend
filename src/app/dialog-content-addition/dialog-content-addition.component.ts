@@ -19,7 +19,7 @@ export class DialogContentAdditionComponent implements OnInit {
   addCourse() {
     console.log(this.courseName)
     this.service.courseContentTreeModel.course_name = this.courseName
-    this.router.navigate(['add_course'], { relativeTo: this.route });
+    this.router.navigateByUrl("/ccp/add_course");
   }
 
 }

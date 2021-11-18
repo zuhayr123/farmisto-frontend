@@ -47,6 +47,8 @@ import { ChildTextInfoComponent } from './child-text-info/child-text-info.compon
 import { CreateCourseService } from './create-course.service';
 import { PopulateCoursesService } from './services/populate-courses.service';
 import { UserInformationComponent } from './user-information/user-information.component';
+import { ContentControlScreenComponent } from './content-control-screen/content-control-screen.component';
+import { LoginScreenComponent } from './login-screen/login-screen.component';
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import { UserInformationComponent } from './user-information/user-information.co
     AddContentInfoComponent,
     ChildVideoContentInfoComponent,
     ChildTextInfoComponent,
-    UserInformationComponent
+    UserInformationComponent,
+    ContentControlScreenComponent,
+    LoginScreenComponent
   ],
   imports: [
     BrowserModule,

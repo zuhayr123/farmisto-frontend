@@ -285,7 +285,7 @@ export class CourseAddComponentComponent implements OnInit {
 
   addCourseContent(content_id: string, content_name: string) {
     console.log("data as seen by the course content was " + content_id)
-    this.router.navigateByUrl("add_course_content", { state: { data: { content_name: content_name, content_id: content_id, treeData : this.service.courseContentTreeModel } } });
+    this.router.navigateByUrl("ccp/add_course_content", { state: { data: { content_name: content_name, content_id: content_id, treeData : this.service.courseContentTreeModel } } });
   }
 
   getSugestions() {

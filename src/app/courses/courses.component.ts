@@ -64,6 +64,7 @@ export class CoursesComponent implements AfterViewInit {
   showCourseDetails(row:any) {
     console.log("the data visible in the course component while navigation is " + JSON.stringify(row));
     this.service.courseContentTreeModel = row as CourseContentTreeModel;
-    this.router.navigateByUrl("add_course");
+    this.router.navigateByUrl("ccp/add_course");
+    // this.router.navigate(['add_course'], { relativeTo: this.route });
   }
 }

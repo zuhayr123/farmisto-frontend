@@ -9,23 +9,33 @@ import { AddContentInfoComponent } from './add-content-info/add-content-info.com
 import { ChildVideoContentInfoComponent } from './child-video-content-info/child-video-content-info.component';
 import { ChildTextInfoComponent } from './child-text-info/child-text-info.component';
 import { UserInformationComponent } from './user-information/user-information.component';
+import { ContentControlScreenComponent } from './content-control-screen/content-control-screen.component';
+import { LoginScreenComponent } from './login-screen/login-screen.component';
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  {path: 'courses',component: CoursesComponent},
-  {path: 'add_course', component: CourseAddComponentComponent},
-  { path: 'user_details', component: UserDetailsComponent },
-  { path: 'analytics', component: AnalyticsComponent },
-  {path : 'add_course_content', component:AddContentInfoComponent,
-  children : [
-    {
-      path:'video_content', component: ChildVideoContentInfoComponent
-    },
+  { path: '', component: LoginScreenComponent },
+  {
+    path: 'ccp', component: ContentControlScreenComponent,
+    children: [
+      { path: 'home', component: HomeComponent },
+      { path: 'courses', component: CoursesComponent },
+      { path: 'add_course', component: CourseAddComponentComponent },
+      { path: 'user_details', component: UserDetailsComponent },
+      { path: 'analytics', component: AnalyticsComponent },
+      {
+        path: 'add_course_content', component: AddContentInfoComponent,
+        children: [
+          {
+            path: 'video_content', component: ChildVideoContentInfoComponent
+          },
 
-    {
-      path:'text_content', component: ChildTextInfoComponent
-    },
-  ]},
-  { path: 'user-info', component: UserInformationComponent },
+          {
+            path: 'text_content', component: ChildTextInfoComponent
+          },
+        ]
+      },
+      { path: 'user-info', component: UserInformationComponent },
+    ]
+  }
 ];
 
 @NgModule({

@@ -1,0 +1,55 @@
+<div>
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <span style="cursor: pointer; display: flex; justify-content: center; align-items: center;">
+                <img src="/assets/images/farmisto-logo-78x100.png" style="max-height: 3em;">
+            </span>
+
+            <div style="width: 100%;">
+                <div style="padding-left: 1vw;">
+                    Content Control Portal
+                </div>
+            </div>
+
+            <button mat-flat-button style="font-size: 14px; color: green;">
+                <mat-icon>admin_panel_settings</mat-icon>
+                Admin
+            </button>
+
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                    <mat-icon>logout</mat-icon>
+                    <span>Logout</span>
+                </button>
+                <button mat-menu-item disabled>
+                    <mat-icon>notifications</mat-icon>
+                    <span>Notifications</span>
+                </button>
+            </mat-menu>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-drawer-container class="example-container">
+        <mat-drawer mode="side" opened style="width: 16em;">
+            <mat-selection-list #portal [multiple]="false" (selectionChange)="onPortalChange(portal.selectedOptions.selected[0]);">
+                <mat-list-option *ngFor="let dashboard_element of dashboardPopulator" [value]="dashboard_element">
+                    <div style="display: flex; flex-direction: row;">
+
+                        <img src={{dashboard_element.image_src}} height="20em">
+                        <div style="padding-left: 1em;">
+                            {{dashboard_element.title}}
+                        </div>
+                    </div>
+                </mat-list-option>
+            </mat-selection-list>
+        </mat-drawer>
+        <mat-drawer-content>
+            <router-outlet>
+
+            </router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>
