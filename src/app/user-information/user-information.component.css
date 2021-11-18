@@ -1,0 +1,18 @@
+.title {
+    padding-top: 1.5em;
+    padding-left: 1.5em;
+    font-weight: bold;
+    font-size: large;
+}
+
+.description {
+    padding-top: 0.8em;
+    padding-left: 1.7em;
+    color: dimgray;
+}
+
+.containUserInfo {
+    margin-left: 2.5em;
+    margin-top: 1em;
+    margin-right: 2.5em;
+}

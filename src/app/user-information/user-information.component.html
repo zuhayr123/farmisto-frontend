@@ -1,0 +1,172 @@
+<div style="width: 98%; min-height: 98%; background-color: white; margin: 1%; border-radius: 20px;">
+
+    <div class="title">
+        User Information
+    </div>
+
+    <div class="description" style="margin-bottom: 1em;">
+        Get to know everything about an individual user, you can also change the details.
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="title" style="font-size: medium; margin-left: 1em; ">
+        Basic personal information
+    </div>
+
+    <div class="description" style="margin-left: 0.8em; margin-bottom: 1em;">
+        Information like name and address will be shown here.
+    </div>
+
+    <div class="containUserInfo">
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <img src="./assets/images/avatar.svg">
+            <div>
+                <div class="title">
+                    Farmer Name
+                </div>
+                <div class="description" style="font-size: medium;">
+                    Type of farming - subtitle
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="title">
+                Address
+            </div>
+            <div class="description" style="font-size: medium;">
+                F-2703 Livingston, Supertech
+            </div>
+            <div class="description" style="font-size: medium;">
+                Crossing Republik, Ghaziabad
+            </div>
+            <div class="description" style="font-size: medium;">
+                Uttar Pradesh
+            </div>
+        </div>
+
+        <div>
+            <div class="title">
+                Contact Details
+            </div>
+            <div class="description" style="font-size: medium;">
+                +91 9140762664
+            </div>
+            <div class="description" style="font-size: medium;">
+                Email ID : info@laaltentech.com
+            </div>
+            <div class="description" style="font-size: medium;">
+                Location : Prayagraj
+            </div>
+        </div>
+    </div>
+
+    <mat-divider style="margin-top: 1em;"></mat-divider>
+
+    <div class="title" style="font-size: medium; margin-left: 1em; ">
+        User Analytics Information
+    </div>
+
+    <div class="description" style="margin-left: 0.8em; margin-bottom: 1em;">
+        Information about the user watch patterns and history
+    </div>
+
+    <div class="containUserInfo">
+        <div class="title" style="font-size: medium; margin-left: 1em; margin-top: 1em;">
+            Daily Active Users
+        </div>
+
+        <div class="description" style="margin-left: 0.8em; margin-bottom: 1em;">
+            This is shows the number of active and inactive users on the application. Active user means a user who is interacting with the application.
+        </div>
+
+        <div style="min-height: 400px;">
+            <ngx-charts-area-chart-stacked [view]="view_line_graph" [scheme]="colorScheme" [legend]="legend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [timeline]="timeline"
+                [results]="multi" (select)="onSelect($event)">
+            </ngx-charts-area-chart-stacked>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="title" style="font-size: medium; margin-left: 1em; margin-top: 1em;">
+            Best Performing Courses
+        </div>
+
+        <div class="description" style="margin-left: 0.8em; margin-bottom: 1em;">
+            This shows the top three performing courses, performace in measured in terms of enrollment and bounce rate.
+        </div>
+
+
+        <div style="min-height: 400px;">
+            <ngx-charts-pie-grid style="width: 100%;" [view]="view" [scheme]="colorScheme" [results]="singles" (select)="onSelect($event)" (window:resize)="onResize($event)">
+            </ngx-charts-pie-grid>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="title" style="font-size: medium; margin-left: 1em; margin-top: 1em;">
+            Total Watch Time
+        </div>
+
+        <div class="description" style="margin-left: 0.8em; margin-bottom: 1em;">
+            This shows the total watch time every day
+        </div>
+
+
+        <div style="min-height: 400px;">
+            <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="bar_dummy" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+            </ngx-charts-bar-vertical>
+        </div>
+    </div>
+
+    <mat-divider style="margin-top: 1em;"></mat-divider>
+
+    <div class="title" style="font-size: medium; margin-left: 1em; color: #e53935;">
+        Dangerous Operations
+    </div>
+
+    <div class="description" style="margin-left: 0.8em; margin-bottom: 1em; color: #e53935;">
+        These information can alter user data or can potentially remove users, use them with caution
+    </div>
+
+    <div class="containUserInfo">
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <div class="description" style="margin-left: 0.8em; margin-bottom: 1em; width: 40%;">
+                Delete user from database and all privileges of the user as well as history
+            </div>
+
+            <div style="width: 40%;"></div>
+            <button mat-stroked-button style="color: #e53935;">
+                <mat-icon>person_remove</mat-icon>
+                Delete User
+            </button>
+        </div>
+
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <div class="description" style="margin-left: 0.8em; margin-bottom: 1em; width: 40%;">
+                Block the user, this will retain the user data but the user won't be able to use the portal anymore
+            </div>
+
+            <div style="width: 40%;"></div>
+            <button mat-stroked-button style="color: #e53935;">
+                <mat-icon>app_blocking</mat-icon>
+                Block User
+            </button>
+        </div>
+
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <div class="description" style="margin-left: 0.8em; margin-bottom: 1em; width: 40%;">
+                Delete the user watch history and personal details, but retain the user.
+            </div>
+
+            <div style="width: 40%;"></div>
+            <button mat-stroked-button style="color: #e53935;">
+                <mat-icon>restore_from_trash</mat-icon>
+                Delete History
+            </button>
+        </div>
+    </div>
+
+</div>
