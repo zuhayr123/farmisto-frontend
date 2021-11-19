@@ -10,21 +10,25 @@ export class CourseContentTreeModel {
     content_type!: string;
     content_id!: string;
     has_content!:boolean;
+    belongs_to!:string;
     children!: [{
         item: string;
         content_type: string;
         content_id: string;
         has_content:boolean;
+        belongs_to:string;
         children: [{
             item: string;
             content_type: string;
             content_id: string;
             has_content:boolean;
+            belongs_to:string;
             children: [{
                 item: string;
                 content_type: string;
                 content_id: string;
                 has_content:boolean;
+                belongs_to:string;
             }]
         }]
     }]

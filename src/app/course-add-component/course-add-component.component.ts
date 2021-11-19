@@ -24,6 +24,7 @@ export class TodoItemNode {
   content_type!: string;
   content_id!: string;
   has_content!: boolean;
+  belongs_to!:string
 }
 
 /** Flat to-do item node with expandable and level information */
@@ -93,8 +94,13 @@ export class ChecklistDatabase {
   /** Add an item to to-do list */
   insertItem(parent: TodoItemNode, name: string) {
     if (!parent.children) parent.children = [];
+
+    if(parent.content_id==undefined){
+      parent.content_id = Date.now().toString();
+    }
     var currentTimeInMilliseconds = Date.now();
-    parent.children.push({ item: name, content_id: currentTimeInMilliseconds.toString() } as TodoItemNode);
+    console.log("the parent content id is : " + parent.content_id);
+    parent.children.push({ item: name, content_id: currentTimeInMilliseconds.toString(), belongs_to:parent.content_id } as TodoItemNode);
     this.dataChange.next(this.data);
   }
 
@@ -180,11 +186,13 @@ export class CourseAddComponentComponent implements OnInit {
         this.service.courseContentTreeModel.course_name = "New Course";
         this.courseName = this.service.courseContentTreeModel.course_name;
         this.service.courseContentTreeModel.course_id = Date.now().toString();
+        this.service.courseContentTreeModel.content_id = this.service.courseContentTreeModel.course_id 
       }
 
       else{
         console.log("offline data was : " + this.service.courseContentTreeModel.course_name)
         this.service.courseContentTreeModel.course_id = Date.now().toString();
+        this.service.courseContentTreeModel.content_id = this.service.courseContentTreeModel.course_id
         this.courseName = this.service.courseContentTreeModel.course_name;
         console.log("offline data was updated");
       }
