@@ -164,7 +164,8 @@ export class CourseAddComponentComponent implements OnInit {
   ngOnInit(): void {
     this.getSugestions();
     console.log("the data receievd on open was  " + this.service.courseContentTreeModel._id);
-    if (this.service.courseContentTreeModel.course_name != "" && this.service.courseContentTreeModel.course_name != undefined) {
+    if (this.service.courseContentTreeModel._id != "" && this.service.courseContentTreeModel._id != undefined) {
+      console.log("online data")
       this.courseName = this.service.courseContentTreeModel.course_name;
       this.short_info = this.service.courseContentTreeModel.course_short_info;
       this.long_info = this.service.courseContentTreeModel.course_long_description;
@@ -174,8 +175,21 @@ export class CourseAddComponentComponent implements OnInit {
     }
 
     else {
-      this.courseName = "New Course"
-      this.service.courseContentTreeModel.course_id = Date.now().toString();
+      console.log("offline data was : " + this.service.courseContentTreeModel.course_name)
+      if(this.service.courseContentTreeModel.course_name == "" || this.service.courseContentTreeModel.course_name == undefined){
+        this.service.courseContentTreeModel.course_name = "New Course";
+        this.courseName = this.service.courseContentTreeModel.course_name;
+        this.service.courseContentTreeModel.course_id = Date.now().toString();
+      }
+
+      else{
+        console.log("offline data was : " + this.service.courseContentTreeModel.course_name)
+        this.service.courseContentTreeModel.course_id = Date.now().toString();
+        this.courseName = this.service.courseContentTreeModel.course_name;
+        console.log("offline data was updated");
+      }
+      
+      
     }
 
     this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges
@@ -285,7 +299,7 @@ export class CourseAddComponentComponent implements OnInit {
 
   addCourseContent(content_id: string, content_name: string) {
     console.log("data as seen by the course content was " + content_id)
-    this.router.navigateByUrl("add_course_content", { state: { data: { content_name: content_name, content_id: content_id, treeData : this.service.courseContentTreeModel } } });
+    this.router.navigateByUrl("ccp/add_course_content", { state: { data: { content_name: content_name, content_id: content_id, treeData : this.service.courseContentTreeModel } } });
   }
 
   getSugestions() {

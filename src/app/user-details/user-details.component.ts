@@ -71,7 +71,7 @@ export class UserDetailsComponent implements AfterViewInit {
   }
 
   navigateToUserInfo(){
-    this.router.navigateByUrl("user-info");
+    this.router.navigateByUrl("ccp/user-info");
   }
 
   applyFilter(event: Event) {
