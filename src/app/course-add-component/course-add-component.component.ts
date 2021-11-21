@@ -24,6 +24,7 @@ export class TodoItemNode {
   content_type!: string;
   content_id!: string;
   has_content!: boolean;
+  belongs_to!: string
 }
 
 /** Flat to-do item node with expandable and level information */
@@ -93,8 +94,17 @@ export class ChecklistDatabase {
   /** Add an item to to-do list */
   insertItem(parent: TodoItemNode, name: string) {
     if (!parent.children) parent.children = [];
+
+    if (parent.content_id == undefined) {
+      parent.content_id = Date.now().toString();
+      console.log("the parent content id is : " + parent.content_id);
+    }
+
+    else {
+      console.log("content id that was not null was : " + parent.content_id);
+    }
     var currentTimeInMilliseconds = Date.now();
-    parent.children.push({ item: name, content_id: currentTimeInMilliseconds.toString() } as TodoItemNode);
+    parent.children.push({ item: name, content_id: currentTimeInMilliseconds.toString(), belongs_to: parent.content_id } as TodoItemNode);
     this.dataChange.next(this.data);
   }
 
@@ -165,31 +175,39 @@ export class CourseAddComponentComponent implements OnInit {
     this.getSugestions();
     console.log("the data receievd on open was  " + this.service.courseContentTreeModel._id);
     if (this.service.courseContentTreeModel._id != "" && this.service.courseContentTreeModel._id != undefined) {
-      console.log("online data")
+      console.log("online data");
       this.courseName = this.service.courseContentTreeModel.course_name;
       this.short_info = this.service.courseContentTreeModel.course_short_info;
       this.long_info = this.service.courseContentTreeModel.course_long_description;
       this.category = this.service.courseContentTreeModel.category_name;
-      this._database.data[0].children = this.service.courseContentTreeModel.children as any
+      this.service.courseContentTreeModel.item = this.service.courseContentTreeModel.course_name;
+      this._database.data[0] = this.service.courseContentTreeModel as any
       this._database.dataChange.next(this._database.data);
     }
 
     else {
       console.log("offline data was : " + this.service.courseContentTreeModel.course_name)
-      if(this.service.courseContentTreeModel.course_name == "" || this.service.courseContentTreeModel.course_name == undefined){
+      if (this.service.courseContentTreeModel.course_name == "" || this.service.courseContentTreeModel.course_name == undefined) {
         this.service.courseContentTreeModel.course_name = "New Course";
         this.courseName = this.service.courseContentTreeModel.course_name;
         this.service.courseContentTreeModel.course_id = Date.now().toString();
+        this.service.courseContentTreeModel.item = this.service.courseContentTreeModel.course_name;
+        this.service.courseContentTreeModel.content_id = this.service.courseContentTreeModel.course_id;
+        this._database.data[0] = this.service.courseContentTreeModel as any
+        this._database.dataChange.next(this._database.data);
       }
 
-      else{
+      else {
         console.log("offline data was : " + this.service.courseContentTreeModel.course_name)
         this.service.courseContentTreeModel.course_id = Date.now().toString();
+        this.service.courseContentTreeModel.item = this.service.courseContentTreeModel.course_name;
+        this.service.courseContentTreeModel.content_id = this.service.courseContentTreeModel.course_id;
         this.courseName = this.service.courseContentTreeModel.course_name;
         console.log("offline data was updated");
+        this._database.data[0] = this.service.courseContentTreeModel as any
+        this._database.dataChange.next(this._database.data);
       }
-      
-      
+
     }
 
     this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges
@@ -287,7 +305,9 @@ export class CourseAddComponentComponent implements OnInit {
 
     nestedNode!.has_content = false;
 
-    this.service.courseContentTreeModel.children = this._database.data[0].children as any;
+    nestedNode!.item = itemValue
+
+    this.service.courseContentTreeModel = this._database.data[0] as any;
 
     var data_string = JSON.stringify(this.service.courseContentTreeModel);
 
@@ -299,7 +319,7 @@ export class CourseAddComponentComponent implements OnInit {
 
   addCourseContent(content_id: string, content_name: string) {
     console.log("data as seen by the course content was " + content_id)
-    this.router.navigateByUrl("ccp/add_course_content", { state: { data: { content_name: content_name, content_id: content_id, treeData : this.service.courseContentTreeModel } } });
+    this.router.navigateByUrl("ccp/add_course_content", { state: { data: { content_name: content_name, content_id: content_id, treeData: this.service.courseContentTreeModel } } });
   }
 
   getSugestions() {
