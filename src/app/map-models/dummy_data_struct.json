@@ -1,0 +1,45 @@
+{
+    "_id": "6198b2a06096b30016f121df",
+    "course_name": "Fresh Course",
+    "course_id": "1637397110930",
+    "content_id": "1637397110930",
+    "category_id": "1",
+    "category_name": "Aabba",
+    "course_short_info": "This is the long description for future uses.",
+    "course_long_description": "Long Desc",
+    "__v": 0,
+    "children": [{
+            "children": [{
+                "children": [{
+                    "_id": "6198b2a06096b30016f121e2",
+                    "item": "Content 01",
+                    "content_id": "1637397140946",
+                    "belongs_to": "1637397134980",
+                    "content_type": "content",
+                    "has_content": "false"
+                }],
+                "_id": "6198b2a06096b30016f121e1",
+                "item": "Sub-Chapter 01",
+                "content_id": "1637397134980",
+                "belongs_to": "1637397121865",
+                "content_type": "sub-chapter",
+                "has_content": "false"
+            }],
+            "_id": "6198b2a06096b30016f121e0",
+            "item": "Chapter 01",
+            "content_id": "1637397121865",
+            "belongs_to": "1637397121865",
+            "content_type": "chapter",
+            "has_content": "false"
+        },
+        {
+            "children": [],
+            "_id": "6198b2a06096b30016f121e3",
+            "item": "Chapter 02",
+            "content_id": "1637397128498",
+            "belongs_to": "1637397121865",
+            "content_type": "chapter",
+            "has_content": "false"
+        }
+    ]
+}
