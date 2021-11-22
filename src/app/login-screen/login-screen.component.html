@@ -1,4 +1,37 @@
-<button mat-raised-button color="primary" style="height: 2.8em !important; display: flex; justify-content: center;" (click)="navigateToContentControlPortal()">
-    <mat-icon>add</mat-icon>
-    Add Course
-</button>
+<div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: whitesmoke;">
+
+    <mat-card>
+        <span style="cursor: pointer; display: flex; justify-content: center; align-items: center;">
+            <img src="/assets/images/farmisto-logo-78x100.png" style="max-height: 4em;">
+        </span>
+
+        <div>
+            <mat-form-field appearance="outline" style="padding-top: 2em; width: 100%; font-size: 14px;">
+                <mat-label>Login email id</mat-label>
+                <input matInput maxlength="400" placeholder="Crop" #input>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" placeholder="Password" style=" width: 100%; font-size: 14px;">
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Crop" #input [type]="hide ? 'password' : 'text'" required>
+            </mat-form-field>
+
+            <div style="display: flex; flex-direction: row;">
+                <div style="width: 80%;">
+                </div>
+                <button mat-raised-button color="primary" style="height: 2.8em !important; width: 7em;" (click)="navigateToContentControlPortal()">
+                    Login
+                </button>
+            </div>
+        </div>
+    </mat-card>
+
+    <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; color: grey; margin-top: 30px; font-size: 14px;">
+        <mat-divider style="width: 200px; margin-right: 10px;"></mat-divider>
+        Or
+        <mat-divider style="width: 200px; margin-left: 10px;"></mat-divider>
+    </div>
+
+    <button style="margin-top: 2em; width: 500px;" mat-stroked-button color="primary">Sign Up</button>
+</div>
