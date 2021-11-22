@@ -16,7 +16,7 @@ export class LoginScreenComponent implements OnInit {
   }
 
   navigateToContentControlPortal(){
-    this.router.navigateByUrl("ccp");
+    this.router.navigateByUrl("ccp/home");
   }
 
 }
