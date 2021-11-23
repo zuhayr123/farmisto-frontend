@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms'
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -33,6 +33,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
 
 
 import { NgxDropzoneModule } from 'ngx-dropzone';
@@ -49,6 +50,9 @@ import { PopulateCoursesService } from './services/populate-courses.service';
 import { UserInformationComponent } from './user-information/user-information.component';
 import { ContentControlScreenComponent } from './content-control-screen/content-control-screen.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
+import { SpinnerOverlayComponent } from './spinner-overlay/spinner-overlay.component';
+import { SpinnerServiceService } from './services/spinner-service.service';
+import { SpinnerInterceptor } from './spinner-interceptor';
 
 
 @NgModule({
@@ -65,7 +69,8 @@ import { LoginScreenComponent } from './login-screen/login-screen.component';
     ChildTextInfoComponent,
     UserInformationComponent,
     ContentControlScreenComponent,
-    LoginScreenComponent
+    LoginScreenComponent,
+    SpinnerOverlayComponent
   ],
   imports: [
     BrowserModule,
@@ -95,9 +100,12 @@ import { LoginScreenComponent } from './login-screen/login-screen.component';
     MatAutocompleteModule,
     NgxChartsModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressSpinnerModule
   ],
-  providers: [CreateCourseService, PopulateCoursesService],
+  providers: [CreateCourseService, PopulateCoursesService, SpinnerServiceService,
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
