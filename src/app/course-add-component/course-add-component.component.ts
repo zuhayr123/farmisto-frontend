@@ -6,9 +6,11 @@ import { BehaviorSubject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CreateCourseService } from '../create-course.service';
 import { CourseContentTreeModel } from '../map-models/course_content_tree';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CourseCategoryModel } from '../map-models/course_category_model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Location } from '@angular/common';
 import { startWith, map } from 'rxjs/operators';
 
 export const _filter = (category: [{ category_name: string; category_id: string; }], value: string): ({ category_name: string; category_id: string; }[]) => {
@@ -148,7 +150,7 @@ export class CourseAddComponentComponent implements OnInit {
   /** The selection for checklist */
   checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
 
-  constructor(private _database: ChecklistDatabase, private router: Router, private route: ActivatedRoute, public service: CreateCourseService, private _formBuilder: FormBuilder) {
+  constructor(private _database: ChecklistDatabase, private router: Router, private route: ActivatedRoute, public service: CreateCourseService, private _formBuilder: FormBuilder, private _snackBar: MatSnackBar, private _location: Location) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<TodoItemFlatNode>(this.getLevel, this.isExpandable);
@@ -335,8 +337,14 @@ export class CourseAddComponentComponent implements OnInit {
     this.service.courseContentTreeModel.course_long_description = this.long_info;
 
     this.service.submitData(this.service.courseContentTreeModel).subscribe(
-      data => console.log("Success", data),
-      error => console.error("Error", error));
+      data => {
+        this.openGreenSnackBar("Created Course Successfully", "Cancel");
+        this.service.courseContentTreeModel = new CourseContentTreeModel();
+        this.backClicked();
+      },
+      error => {
+        this.service.courseContentTreeModel = new CourseContentTreeModel();
+      });
 
     console.log("the data on submit as seen was " + JSON.stringify(this.service.courseContentTreeModel))
   }
@@ -382,5 +390,16 @@ export class CourseAddComponentComponent implements OnInit {
     }
 
     return this.service.courseCategoryModel.state_group;
+  }
+
+  openGreenSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['green-snackbar']
+    });
+  }
+
+  backClicked() {
+    this._location.back();
   }
 }

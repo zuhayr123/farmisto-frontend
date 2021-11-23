@@ -34,6 +34,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 import { NgxDropzoneModule } from 'ngx-dropzone';
@@ -101,7 +102,8 @@ import { SpinnerInterceptor } from './spinner-interceptor';
     NgxChartsModule,
     MatCardModule,
     MatDividerModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [CreateCourseService, PopulateCoursesService, SpinnerServiceService,
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
