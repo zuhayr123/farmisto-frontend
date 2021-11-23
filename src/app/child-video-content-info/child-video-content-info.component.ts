@@ -1,4 +1,5 @@
 import { Component, Injectable, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AddVideoContent } from '../map-models/add-video-content';
 import { CourseCategoryModel } from '../map-models/course_category_model';
 import { CourseContentTreeModel } from '../map-models/course_content_tree';
@@ -11,7 +12,7 @@ import { AddContentService } from '../services/add-content.service';
 })
 export class ChildVideoContentInfoComponent implements OnInit {
 
-  constructor(public service: AddContentService) { }
+  constructor(public service: AddContentService, private router : Router) { }
 
   contentId!: string;
   contentType?: string;
@@ -89,6 +90,8 @@ export class ChildVideoContentInfoComponent implements OnInit {
       console.log(JSON.stringify(this.contentModel));
       this.service.updateContentData(this.contentModel).subscribe((result) => {
         console.log("the result seen was " +  JSON.stringify(result));
+        this.service.addVideoContent = new AddVideoContent();
+        this.router.navigateByUrl("ccp/courses");
       });
       console.log("the response we received was " + res);
     });

@@ -13,10 +13,11 @@ export class LoginScreenComponent implements OnInit {
   constructor(private router : Router) { }
 
   ngOnInit(): void {
+    
   }
 
   navigateToContentControlPortal(){
-    this.router.navigateByUrl("ccp");
+    this.router.navigateByUrl("ccp/home");
   }
 
 }
