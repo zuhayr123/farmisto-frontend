@@ -35,7 +35,7 @@
         <form [formGroup]="stateForm">
             <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
                 <mat-label>Course Category</mat-label>
-                <input type="text" [(ngModel)]="category" matInput formControlName="stateGroup" required [matAutocomplete]="autoGroup">
+                <textarea matInput type="text" [(ngModel)]="category" formControlName="stateGroup" required [matAutocomplete]="autoGroup"></textarea>
                 <mat-autocomplete #autoGroup="matAutocomplete">
                     <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter">
                         <mat-option *ngFor="let name of group.category" [value]="name.category_name">
@@ -48,16 +48,14 @@
 
         <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
             <mat-label>A short description about the course</mat-label>
-            <input type="text" [(ngModel)]="short_info" matInput maxlength="400" #input placeholder="Crop">
-            <mat-hint align="end">{{input.value.length}} / 400</mat-hint>
-            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"></textarea>
+            <textarea type="text" [(ngModel)]="short_info" matInput maxlength="400" #shortDesc placeholder="Crop"></textarea>
+            <mat-hint align="end">{{shortDesc.value.length}} / 400</mat-hint>
         </mat-form-field>
 
         <mat-form-field appearance="outline" style="padding-top: 2em; padding-left: 0.5em;">
             <mat-label>The complete description of the course</mat-label>
-            <input type="text" [(ngModel)]="long_info" matInput maxlength="400" #input placeholder="Crop">
-            <mat-hint align="end">{{input.value.length}} / 800</mat-hint>
-            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="10" cdkAutosizeMaxRows="15"></textarea>
+            <textarea type="text" [(ngModel)]="long_info" matInput maxlength="400" #description placeholder="Crop"></textarea>
+            <mat-hint align="end">{{description.value.length}} / 800</mat-hint>
         </mat-form-field>
 
         <div style="color: dimgray; padding-left: 0.5em; padding-top: 8px; padding-bottom: 4px;">
