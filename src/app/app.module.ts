@@ -54,7 +54,13 @@ import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { SpinnerOverlayComponent } from './spinner-overlay/spinner-overlay.component';
 import { SpinnerServiceService } from './services/spinner-service.service';
 import { SpinnerInterceptor } from './spinner-interceptor';
-
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { LoginService } from './services/user-login.service';
+import { ToastrModule } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { AuthGuard } from './common/guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -71,7 +77,8 @@ import { SpinnerInterceptor } from './spinner-interceptor';
     UserInformationComponent,
     ContentControlScreenComponent,
     LoginScreenComponent,
-    SpinnerOverlayComponent
+    SpinnerOverlayComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -103,10 +110,17 @@ import { SpinnerInterceptor } from './spinner-interceptor';
     MatCardModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [CreateCourseService, PopulateCoursesService, SpinnerServiceService,
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
+  providers:[
+    CookieService,CreateCourseService, PopulateCoursesService, SpinnerServiceService,
+    LoginService,
+    [AuthGuard],
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+
   ],
   bootstrap: [AppComponent]
 })
