@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashbordPopulator } from '../dashboard-drawer-populate'
 import { MatListOption } from '@angular/material/list'
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-content-control-screen',
@@ -10,7 +11,9 @@ import { MatListOption } from '@angular/material/list'
 })
 export class ContentControlScreenComponent {
 
-  constructor(private router: Router, private route : ActivatedRoute) {
+  constructor(private router: Router, private route : ActivatedRoute,
+    private authenticationService: AuthenticationService
+    ) {
   }
 
 
@@ -45,6 +48,13 @@ export class ContentControlScreenComponent {
       this.router.navigate(['user_details'], { relativeTo: this.route});
     }
     console.log((options.value as DashbordPopulator).title);
+  }
+  
+
+  logout(){
+    console.log('trying to logout----------');
+    this.authenticationService.logout();
+    // this.router.navigate(['']);
   }
 
 }
