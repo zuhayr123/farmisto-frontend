@@ -114,6 +114,13 @@ export class ChecklistDatabase {
     node.item = name;
     this.dataChange.next(this.data);
   }
+
+  deleteItem(parent: TodoItemNode, name: string): void {
+    if (parent.children) {
+      parent.children = parent.children.filter(c => c.item !== name);
+      this.dataChange.next(this.data);
+   }
+  }
 }
 
 @Component({
@@ -401,5 +408,14 @@ export class CourseAddComponentComponent implements OnInit {
 
   backClicked() {
     this._location.back();
+  }
+
+  deleteNode(node : TodoItemFlatNode): void{
+    const parentNode = this.getParentNode(node);
+    if(parentNode){
+      const parentFlat = this.flatNodeMap.get(parentNode);
+      this._database.deleteItem(parentFlat!, node.item);
+      this.treeControl.expand(node);
+    }
   }
 }

@@ -1,0 +1,64 @@
+<div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: whitesmoke;">
+    <mat-card>
+        <span style=" display: flex; justify-content: center; align-items: center;">
+            <img src="/assets/images/farmisto-logo-78x100.png" style="max-height: 4em;">
+        </span>
+        <form autocomplete="off" [formGroup]="profileForm" class="mt-2">
+            <div class="row">
+                <mat-form-field appearance="outline" class="flex-1">
+                    <mat-label>Name *</mat-label>
+                    <input matInput type="text" formControlName="name">
+                    <mat-icon matSuffix>
+                        <span class="material-icons-outlined">
+                            account_circle
+                        </span>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline" class="flex-1">
+                    <mat-label>PhoneNo *</mat-label>
+                    <input matInput type="text" maxlength="10" formControlName="phoneNo">
+                    <mat-icon matSuffix>
+                        <span class="material-icons-outlined">
+                            phone
+                        </span>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline" class="flex-1">
+                    <mat-label>Email *</mat-label>
+                    <input matInput type="text" formControlName="email">
+                    <mat-icon matSuffix>
+                        <span class="material-icons-outlined">
+                            local_post_office
+                        </span>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline" class="flex-1">
+                    <mat-label>Create Password *</mat-label>
+                    <input matInput *ngIf="hide" type="password" formControlName="password">
+                    <input matInput *ngIf="!hide" type="text" formControlName="password">
+                    <mat-icon matSuffix (click)="onHide()" style="cursor: pointer;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline" class="flex-1">
+                    <mat-label>Address *</mat-label>
+                    <textarea matInput type="text" formControlName="address"></textarea>
+                    <mat-icon matSuffix>
+                        <span class="material-icons-outlined">
+                            home
+                        </span>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+        </form>
+        <div class="d-flex justify-content-right">
+            <button mat-raised-button color="primary" cdkFocusInitial (click)="onSubmit()" [disabled]="!profileForm.valid">Submit</button>
+        </div>
+    </mat-card>
+</div>

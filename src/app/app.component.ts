@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashbordPopulator } from './dashboard-drawer-populate'
 import { MatListOption } from '@angular/material/list'
+import { AuthenticationService } from './services/authentication.service';
+import { IUser } from './models/model';
 
 
 @Component({
@@ -11,7 +13,13 @@ import { MatListOption } from '@angular/material/list'
 })
 export class AppComponent {
 
-  constructor(private router: Router) {
+  currentUser: IUser | null;
+
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
+    this.currentUser = this.authenticationService.currentUserValue;
+    this.authenticationService.currentUser.subscribe((result) => {
+        this.currentUser = result;
+    });
   }
 
 
@@ -21,34 +29,6 @@ export class AppComponent {
 
 
   dashboardPopulator: DashbordPopulator[] = [
-    new DashbordPopulator('Home', "/assets/images/dashboard-icons/house.png"),
-    new DashbordPopulator('Courses', "/assets/images/dashboard-icons/course.png"),
-    new DashbordPopulator('Analytics', "/assets/images/dashboard-icons/graph.png"),
-    new DashbordPopulator('User Details', "/assets/images/dashboard-icons/farmer.png"),
-    new DashbordPopulator('Home', "/assets/images/dashboard-icons/house.png"),
-    new DashbordPopulator('Courses', "/assets/images/dashboard-icons/course.png"),
-    new DashbordPopulator('Analytics', "/assets/images/dashboard-icons/graph.png"),
-    new DashbordPopulator('User Details', "/assets/images/dashboard-icons/farmer.png"),
-    new DashbordPopulator('Home', "/assets/images/dashboard-icons/house.png"),
-    new DashbordPopulator('Courses', "/assets/images/dashboard-icons/course.png"),
-    new DashbordPopulator('Analytics', "/assets/images/dashboard-icons/graph.png"),
-    new DashbordPopulator('User Details', "/assets/images/dashboard-icons/farmer.png"),
-    new DashbordPopulator('Home', "/assets/images/dashboard-icons/house.png"),
-    new DashbordPopulator('Courses', "/assets/images/dashboard-icons/course.png"),
-    new DashbordPopulator('Analytics', "/assets/images/dashboard-icons/graph.png"),
-    new DashbordPopulator('User Details', "/assets/images/dashboard-icons/farmer.png"),
-    new DashbordPopulator('Home', "/assets/images/dashboard-icons/house.png"),
-    new DashbordPopulator('Courses', "/assets/images/dashboard-icons/course.png"),
-    new DashbordPopulator('Analytics', "/assets/images/dashboard-icons/graph.png"),
-    new DashbordPopulator('User Details', "/assets/images/dashboard-icons/farmer.png"),
-    new DashbordPopulator('Home', "/assets/images/dashboard-icons/house.png"),
-    new DashbordPopulator('Courses', "/assets/images/dashboard-icons/course.png"),
-    new DashbordPopulator('Analytics', "/assets/images/dashboard-icons/graph.png"),
-    new DashbordPopulator('User Details', "/assets/images/dashboard-icons/farmer.png"),
-    new DashbordPopulator('Home', "/assets/images/dashboard-icons/house.png"),
-    new DashbordPopulator('Courses', "/assets/images/dashboard-icons/course.png"),
-    new DashbordPopulator('Analytics', "/assets/images/dashboard-icons/graph.png"),
-    new DashbordPopulator('User Details', "/assets/images/dashboard-icons/farmer.png"),
     new DashbordPopulator('Home', "/assets/images/dashboard-icons/house.png"),
     new DashbordPopulator('Courses', "/assets/images/dashboard-icons/course.png"),
     new DashbordPopulator('Analytics', "/assets/images/dashboard-icons/graph.png"),

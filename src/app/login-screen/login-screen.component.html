@@ -6,21 +6,24 @@
         </span>
 
         <div>
-            <mat-form-field appearance="outline" style="padding-top: 2em; width: 100%; font-size: 14px;">
-                <mat-label>Login email id</mat-label>
-                <input matInput maxlength="400" placeholder="Crop" #input>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" placeholder="Password" style=" width: 100%; font-size: 14px;">
-                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                <mat-label>Password</mat-label>
-                <input matInput placeholder="Crop" #input [type]="hide ? 'password' : 'text'" required>
-            </mat-form-field>
-
-            <div style="display: flex; flex-direction: row;">
-                <div style="width: 80%;">
+            <form autocomplete="off" [formGroup]="form" class="mt-2">
+                <div class="row">
+                    <mat-form-field appearance="outline" style="padding-top: 2em; width: 100%; font-size: 14px;">
+                        <mat-label>Login Email Id</mat-label>
+                        <input matInput maxlength="400" formControlName="email">
+                        <mat-icon matSuffix>local_post_office</mat-icon>
+                    </mat-form-field>
                 </div>
-                <button mat-raised-button color="primary" style="height: 2.8em !important; width: 7em;" (click)="navigateToContentControlPortal()">
+                <div class="row">
+                    <mat-form-field appearance="outline" placeholder="Password" style=" width: 100%; font-size: 14px;">
+                        <mat-icon matSuffix style="cursor: pointer;" (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" required formControlName="password">
+                    </mat-form-field> 
+                </div>
+            </form>
+            <div style="display: flex; justify-content: end;">
+                <button mat-raised-button color="primary" style="height: 2.8em !important; width: 7em;" (click)="login()" [disabled]="!form.valid">
                     Login
                 </button>
             </div>
@@ -33,5 +36,5 @@
         <mat-divider style="width: 200px; margin-left: 10px;"></mat-divider>
     </div>
 
-    <button style="margin-top: 2em; width: 500px;" mat-stroked-button color="primary">Sign Up</button>
+    <button style="margin-top: 2em; width: 500px;" mat-stroked-button color="primary" (click)="signup()">Sign Up</button>
 </div>
