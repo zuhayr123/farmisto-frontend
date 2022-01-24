@@ -15,8 +15,9 @@ import { CreateCourseService } from '../create-course.service';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'category', 'enroll_status'];
+  displayedColumns: string[] = ['id', 'name', 'category', 'enroll_status', 'options'];
   dataSource!: MatTableDataSource<any>;
+  logic = false;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
