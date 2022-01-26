@@ -1,10 +1,26 @@
-<h1 mat-dialog-title>Start a new course!</h1>
-<div mat-dialog-content style="color: dimgray; width: 25vw;">Enter the name of your new course, don't worry you will be able to edit it later.</div>
+<h1 mat-dialog-title>Bulk Create</h1>
+<div mat-dialog-content style="color: dimgray; width: 25vw;">Now you can create course in bulk, choose the number of copies you'd like to make with the same set of data.</div>
 
-<mat-form-field appearance="outline">
+<mat-form-field appearance="outline" style="margin-top: 2em;">
     <mat-label>Course</mat-label>
     <input matInput placeholder="Crop" [(ngModel)]="courseName">
     <mat-icon matSuffix>edit</mat-icon>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+    <mat-label>Number of copies</mat-label>
+    <mat-select>
+        <mat-option value="option1">1</mat-option>
+        <mat-option value="option2">2</mat-option>
+        <mat-option value="option3">3</mat-option>
+        <mat-option value="option1">4</mat-option>
+        <mat-option value="option2">5</mat-option>
+        <mat-option value="option3">6</mat-option>
+        <mat-option value="option1">7</mat-option>
+        <mat-option value="option2">8</mat-option>
+        <mat-option value="option3">9</mat-option>
+        <mat-option value="option1">10</mat-option>
+    </mat-select>
 </mat-form-field>
 
 

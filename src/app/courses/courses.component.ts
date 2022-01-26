@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DialogContentAdditionComponent } from '../dialog-content-addition/dialog-content-addition.component';
 import { CourseContentTreeModel } from '../map-models/course_content_tree';
 import { CreateCourseService } from '../create-course.service';
+import { DialogCourseBulkCreateComponent } from '../dialog-course-bulk-create/dialog-course-bulk-create.component';
 
 
 @Component({
@@ -43,6 +44,18 @@ export class CoursesComponent implements AfterViewInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogContentAdditionComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      if (result == true) {
+        // this.deleteJobs(id);
+      }
+    });
+  }
+
+  openBulkCourseUpload(row : any) {
+    console.log(JSON.stringify(row));
+    const dialogRef = this.dialog.open(DialogCourseBulkCreateComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

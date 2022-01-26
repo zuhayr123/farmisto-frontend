@@ -74,7 +74,7 @@
                         </button>
 
                         <mat-menu #menu="matMenu" xPosition="before">
-                            <button mat-menu-item>
+                            <button mat-menu-item (click)="openBulkCourseUpload(row);">
                                 <mat-icon>content_copy</mat-icon>
                                 Copy
                             </button>
