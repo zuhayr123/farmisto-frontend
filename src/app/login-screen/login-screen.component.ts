@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LoginService } from '../services/user-login.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SignUpComponent } from '../sign-up/sign-up.component';
 
 @Component({
   selector: 'app-login-screen',
@@ -19,7 +21,8 @@ export class LoginScreenComponent implements OnInit {
     private loginService : LoginService,
     private toastService : ToastrService,
     private authenticationService : AuthenticationService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    public dialog: MatDialog) {
       this.form = this.fb.group({
         email: ['', [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
         password: ['', [Validators.required]],
@@ -56,7 +59,9 @@ export class LoginScreenComponent implements OnInit {
   }
 
   signup() {
-    this.router.navigateByUrl("signup");
+    const dialogRef = this.dialog.open(SignUpComponent, {
+      data : false
+    });
   }
 
 }

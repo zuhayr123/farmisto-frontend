@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
 import { LoginService } from "../services/user-login.service";
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
@@ -18,7 +17,6 @@ export class SignUpComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private loginService: LoginService,
-        private router : Router,
         private toastService: ToastrService,
 
         public dialogRef: MatDialogRef<SignUpComponent>,
@@ -44,11 +42,7 @@ export class SignUpComponent implements OnInit {
             }
             this.loginService.signup(userData).subscribe((result: any) => {
                 if(result && result.status=="success"){
-                    if(!this.data){
-                        this.router.navigate([''])
-                    }else{
-                        this.dialogRef.close();
-                    }
+                    this.dialogRef.close();
                 }
             })
         }else{
