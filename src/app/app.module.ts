@@ -61,6 +61,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { AuthGuard } from './common/guards/auth.guard';
+import { UpdateAccessDialog, UserAccessComponent } from './user-access/user-access-component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,9 @@ import { AuthGuard } from './common/guards/auth.guard';
     ContentControlScreenComponent,
     LoginScreenComponent,
     SpinnerOverlayComponent,
-    SignUpComponent
+    SignUpComponent,
+    UserAccessComponent,
+    UpdateAccessDialog
   ],
   imports: [
     BrowserModule,

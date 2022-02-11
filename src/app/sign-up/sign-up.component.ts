@@ -1,10 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { LoginService } from "../services/user-login.service";
 import { ToastrService } from 'ngx-toastr';
-// import { AuthenticationService } from "../services/authentication.service";
-
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
     selector: 'app-sign-up-dialog',
@@ -21,7 +20,9 @@ export class SignUpComponent implements OnInit {
         private loginService: LoginService,
         private router : Router,
         private toastService: ToastrService,
-        // private authenticationService: AuthenticationService
+
+        public dialogRef: MatDialogRef<SignUpComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: boolean,
     ) {
         this.profileForm = this.fb.group({
             name: ['', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]],
@@ -43,7 +44,11 @@ export class SignUpComponent implements OnInit {
             }
             this.loginService.signup(userData).subscribe((result: any) => {
                 if(result && result.status=="success"){
-                    this.router.navigate([''])
+                    if(!this.data){
+                        this.router.navigate([''])
+                    }else{
+                        this.dialogRef.close();
+                    }
                 }
             })
         }else{

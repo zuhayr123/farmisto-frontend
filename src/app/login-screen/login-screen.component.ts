@@ -42,11 +42,12 @@ export class LoginScreenComponent implements OnInit {
       }
       this.loginService.login(data).subscribe((result: any) => {
         if(result && result.status=='success'){
-          console.log('111');
           this.authenticationService.loginAfterVerification(result.token);
           this.router.navigate(['/ccp/home']);
-        }else{
+        }else if(result && result.status=='incorrect'){
           this.toastService.error('Please enter correct details.');
+        }else{
+          this.toastService.error("You do not have the access to continue. Contact Admin");
         }
       });
     }else{

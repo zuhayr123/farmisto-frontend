@@ -33,6 +33,7 @@ export class AppComponent {
     new DashbordPopulator('Courses', "/assets/images/dashboard-icons/course.png"),
     new DashbordPopulator('Analytics', "/assets/images/dashboard-icons/graph.png"),
     new DashbordPopulator('User Details', "/assets/images/dashboard-icons/farmer.png"),
+    new DashbordPopulator('User Access', "/assets/images/dashboard-icons/farmer.png"),
   ];
 
   onPortalChange(options: MatListOption) {
@@ -52,6 +53,10 @@ export class AppComponent {
 
     else if ((options.value as DashbordPopulator).title == 'User Details') {
       this.router.navigateByUrl("user_details");
+    }
+
+    else if ((options.value as DashbordPopulator).title == 'User Access') {
+      this.router.navigateByUrl("user_access");
     }
     console.log((options.value as DashbordPopulator).title);
   }
