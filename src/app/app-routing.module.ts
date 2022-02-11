@@ -13,6 +13,8 @@ import { ContentControlScreenComponent } from './content-control-screen/content-
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthGuard } from './common/guards/auth.guard';
+import { UserAccessComponent } from './user-access/user-access-component';
+
 const routes: Routes = [
   { path: '', component: LoginScreenComponent },
   {
@@ -22,6 +24,7 @@ const routes: Routes = [
       { path: 'courses', component: CoursesComponent, canActivate: [AuthGuard], },
       { path: 'add_course', component: CourseAddComponentComponent, canActivate: [AuthGuard], },
       { path: 'user_details', component: UserDetailsComponent, canActivate: [AuthGuard], },
+      { path: 'user_access', component: UserAccessComponent,  canActivate: [AuthGuard], },
       { path: 'analytics', component: AnalyticsComponent, canActivate: [AuthGuard], },
       {
         path: 'add_course_content', component: AddContentInfoComponent,

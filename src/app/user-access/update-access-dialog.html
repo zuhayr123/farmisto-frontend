@@ -1,0 +1,11 @@
+<h3>Update access for {{data.name}}</h3>
+<div style="display: flex; flex-direction: column;">
+  <mat-select [(value)]="selected">
+      <mat-option *ngFor="let type of accessType" [value]="type">
+        {{type}}
+      </mat-option>
+  </mat-select>
+  <button style="justify-content: flex-end; margin-top: 10pt;" mat-raised-button color="primary" (click)="updateAccess()">
+    Update
+  </button>
+</div>

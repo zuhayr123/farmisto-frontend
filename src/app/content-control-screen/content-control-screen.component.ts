@@ -16,9 +16,8 @@ export class ContentControlScreenComponent {
     ) {
   }
 
-
   title = 'farmisto-frotend';
-  typesOfShoes: string[] = ['Home', 'Courses', 'Analytics', 'User Details', 'Sneakers', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+  typesOfShoes: string[] = ['Home', 'Courses', 'Analytics', 'User Details', 'User Access', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   image_list: string[] = ['/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', '/assets/images/dashboard-icons/course.png', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
 
 
@@ -27,6 +26,7 @@ export class ContentControlScreenComponent {
     new DashbordPopulator('Courses', "/assets/images/dashboard-icons/course.png"),
     new DashbordPopulator('Analytics', "/assets/images/dashboard-icons/graph.png"),
     new DashbordPopulator('User Details', "/assets/images/dashboard-icons/farmer.png"),
+    new DashbordPopulator('User Access', "/assets/images/dashboard-icons/farmer.png")
     ];
 
   onPortalChange(options: MatListOption) {
@@ -47,14 +47,17 @@ export class ContentControlScreenComponent {
     else if ((options.value as DashbordPopulator).title == 'User Details') {
       this.router.navigate(['user_details'], { relativeTo: this.route});
     }
+
+    else if ((options.value as DashbordPopulator).title == 'User Access') {
+      this.router.navigate(['user_access'], { relativeTo: this.route});
+    }
+
     console.log((options.value as DashbordPopulator).title);
   }
   
 
   logout(){
-    console.log('trying to logout----------');
     this.authenticationService.logout();
-    // this.router.navigate(['']);
   }
 
 }

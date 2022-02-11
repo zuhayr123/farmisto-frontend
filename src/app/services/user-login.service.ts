@@ -14,7 +14,6 @@ export class LoginService {
     ApiUrl = this.Base_url + '/user';
 
     login(data:any):Observable<any>{
-        console.log('here')
         return this._http.post<any>(this.apiUrl + '/login', data);
     }
 
@@ -24,5 +23,13 @@ export class LoginService {
 
     logout(): Observable<void> {
         return this._http.post<any>(this.apiUrl.concat('/logout'),'');
+    }
+
+    getAllUsers(): Observable<any>{
+        return this._http.get<any>(this.apiUrl + '/getUsers');
+    }
+
+    updateUserAccess(user: any, access:string): Observable<any>{
+        return this._http.post<any>(this.apiUrl + '/updateAccess', {user: user, access: access})
     }
 }
