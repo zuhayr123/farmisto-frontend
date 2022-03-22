@@ -12,9 +12,11 @@ import { CourseCategoryModel } from './map-models/course_category_model';
 })
 export class CreateCourseService {
 
-  base_url = "https://farmisto-learn.herokuapp.com/api"
+  // base_url = "https://farmisto-learn.herokuapp.com/api"
+  base_url = "https://farmisto-develop-branch.herokuapp.com/api"
   _url_submit_content_list = this.base_url + '/course/course_info';
   _url_get_course_list = this.base_url + '/course/all_courses';
+  publish_course = this.base_url + '/course/publish';
   courseName: string = ""
 
   constructor(private _http: HttpClient) { }
@@ -36,5 +38,9 @@ export class CreateCourseService {
   getCourseList() {
     console.log("course list was called");
     return this._http.get(this._url_get_course_list);
+  }
+
+  publishCourse(data:any){
+    return this._http.post<any>(this.publish_course, data);
   }
 }
