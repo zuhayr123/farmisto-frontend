@@ -15,7 +15,7 @@ import { CreateCourseService } from '../create-course.service';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'category', 'enroll_status'];
+  displayedColumns: string[] = ['id', 'name', 'category', 'enroll_status', 'publish_status'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator)
@@ -66,5 +66,11 @@ export class CoursesComponent implements AfterViewInit {
     this.service.courseContentTreeModel = row as CourseContentTreeModel;
     this.router.navigateByUrl("ccp/add_course");
     // this.router.navigate(['add_course'], { relativeTo: this.route });
+  }
+
+  changePublishStatus(courseId: any, published: boolean){
+    this.service.publishCourse({_id: courseId, published: published}).subscribe((res) => {
+      this.ngAfterViewInit();
+    })
   }
 }

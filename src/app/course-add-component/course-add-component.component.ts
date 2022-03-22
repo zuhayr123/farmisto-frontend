@@ -342,6 +342,7 @@ export class CourseAddComponentComponent implements OnInit {
     this.service.courseContentTreeModel.category_name = this.findCategory(this.category).category_name;
     this.service.courseContentTreeModel.course_short_info = this.short_info;
     this.service.courseContentTreeModel.course_long_description = this.long_info;
+    this.service.courseContentTreeModel.published = false;
 
     this.service.submitData(this.service.courseContentTreeModel).subscribe(
       data => {

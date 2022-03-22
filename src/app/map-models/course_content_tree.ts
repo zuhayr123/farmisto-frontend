@@ -11,6 +11,7 @@ export class CourseContentTreeModel {
     content_id!: string;
     has_content!:boolean;
     belongs_to!:string;
+    published!: boolean;
     children!: [{
         item: string;
         content_type: string;
