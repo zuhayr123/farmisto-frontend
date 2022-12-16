@@ -13,8 +13,9 @@ import { ContentControlScreenComponent } from './content-control-screen/content-
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthGuard } from './common/guards/auth.guard';
+import { ShundevComponent } from './shundev/shundev.component';
 const routes: Routes = [
-  { path: '', component: LoginScreenComponent },
+  { path: '', component: ShundevComponent },
   {
     path: 'ccp', component: ContentControlScreenComponent,
     children: [

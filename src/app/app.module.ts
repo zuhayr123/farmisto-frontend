@@ -35,7 +35,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -62,6 +62,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { AuthGuard } from './common/guards/auth.guard';
 import { DialogCourseBulkCreateComponent } from './dialog-course-bulk-create/dialog-course-bulk-create.component';
+import { ShundevComponent } from './shundev/shundev.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { DialogCourseBulkCreateComponent } from './dialog-course-bulk-create/dia
     LoginScreenComponent,
     SpinnerOverlayComponent,
     SignUpComponent,
-    DialogCourseBulkCreateComponent
+    DialogCourseBulkCreateComponent,
+    ShundevComponent
   ],
   imports: [
     BrowserModule,
@@ -113,6 +115,7 @@ import { DialogCourseBulkCreateComponent } from './dialog-course-bulk-create/dia
     MatDividerModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatSlideToggleModule,
     ToastrModule.forRoot(),
   ],
   providers:[

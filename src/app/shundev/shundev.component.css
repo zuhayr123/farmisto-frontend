@@ -1,0 +1,9 @@
+.example-card {
+    max-width: 400px;
+    margin-bottom: 8px;
+    padding-bottom: 50px;
+}
+
+.mat-card {
+    width: 100vh;
+}
